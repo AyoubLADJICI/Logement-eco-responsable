@@ -1,0 +1,66 @@
+/* Styles pour la page Consommation */
+
+/* Conteneur principal */
+.container {
+    margin-top: 20px;
+}
+
+/* Titre de la page */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Sous-titre */
+p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+/* Styles pour les boutons hoverable */
+/* Style général pour les boutons */
+.btn {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: green;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid #04AA6D; /* Couleur de la bordure */
+    background-color: rgb(169, 34, 34); /* Couleur de fond par défaut */
+  }
+  
+  .btn1 {
+    background-color: white;
+    color:#000000;
+    border: 2px solid green;
+  }
+  /* Effet au survol */
+  .btn1:hover {
+    background-color: green; /* Fond vert au survol */
+    color: rgb(255, 255, 255); /* Texte blanc au survol */
+  }
+  
+.btn2 {
+    background-color: white;
+    color:#000000;
+    border: 2px solid red;
+  }
+
+/* Effet au survol */
+.btn2:hover {
+    background-color: red; /* Fond vert au survol */
+    color: rgb(255, 255, 255); /* Texte blanc au survol */
+}
+
+#chart-container {
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    background: #000000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
