@@ -12,8 +12,7 @@
 
 **Question 2 :** Les ordres SQL permettant de détruire toutes les tables existantes dans notre base se trouve dans le fichier :
 **📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 15 à 20```
-- Cela est possible grâce à la commande ```sql
-   DROP TABLE IF EXISTS nom_table;```
+- Cela est possible grâce à la commande ```DROP TABLE IF EXISTS nom_table;```
 - Je me suis appuyé sur les ressources disponibles dans le cours de base de données sur Moodle.
 - Ce **[`site`](https://www.devart.com/dbforge/sql/studio/sql-server-drop-table.html)** m'a aussi aidé pour répondre à cette question, il présente les différentes façons d'utiliser DROP TABLE dans SQL.
 
@@ -28,5 +27,20 @@
 - VARCHAR(45) → Pour supporter des adresses IP au format IPv4 et IPv6
 - DECIMAL(5,2) → Pour les montants de factures en supposant qu'elles ne dépassent pas 999,99€
 - REAL → Pour les champs nécessitant une valeur numérique précise  
-- TIMESTAMP → Pour enregistrer automatiquement les dates et heures d'insertion dans la base de données 
+- TIMESTAMP → Pour enregistrer automatiquement les dates et heures d'insertion dans la base de données
+
+**Question 4 :** Les ordres SQL permettant de créer un logement avec 4 pièces :
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 98 à 103```
+
+**Question 5 :** Les ordres SQL permettant de créer au moins 4 types de capteurs/actionneurs :
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 108 à 110```
+
+**Question 6 :** Les ordres SQL permettant de créer au moins 2 capteurs/actionneurs :
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 115 à 116```
+
+**Question 7 :** Les ordres SQL permettant de créer au moins 2 mesures par capteur/actionneur :
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 121 à 122```
+
+**Question 8 :** Les ordres SQL permettant de créer au moins 4 factures :
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 127 à 128``` 
 
