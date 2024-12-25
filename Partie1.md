@@ -9,6 +9,7 @@
 - Les **losanges rouges** montrent les **relations entre les entités**. 
 - Par exemple, un **Logement** peut **contenir une ou plusieurs Pièces** *(1:N)*.
 - Un **Logement** peut aussi **générer aucune ou plusieurs Factures** *(0:N)*.
+
 **Question 2 :** Les ordres SQL permettant de détruire toutes les tables existantes dans notre base se trouve dans le fichier :
 **📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)**
 - Cela est possible grâce à la commande ```bash DROP TABLE IF EXISTS nom_table```
