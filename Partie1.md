@@ -39,7 +39,7 @@
 
 **Question 6 :** Les ordres SQL permettant de créer au moins 2 capteurs/actionneurs :
 **📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 113 à 123```
--- J'ai crée un capteur/actionneur pour chaque type et en l'associant à une pièce spécifique d'un logement
+- J'ai crée un capteur/actionneur pour chaque type et en l'associant à une pièce spécifique d'un logement
 
 **Question 7 :** Les ordres SQL permettant de créer au moins 2 mesures par capteur/actionneur :
 **📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 125 à 143```
