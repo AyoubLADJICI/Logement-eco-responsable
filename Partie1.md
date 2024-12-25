@@ -30,17 +30,24 @@
 - TIMESTAMP → Pour enregistrer automatiquement les dates et heures d'insertion dans la base de données
 
 **Question 4 :** Les ordres SQL permettant de créer un logement avec 4 pièces :
-**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 98 à 103```
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 95 à 103```
+- J'ai crée un logement avec 4 pièces distinces : Chambre, Salon, Cuisine, Salle de bain
 
 **Question 5 :** Les ordres SQL permettant de créer au moins 4 types de capteurs/actionneurs :
-**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 108 à 110```
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 105 à 111```
+- J'ai crée 5 types de capteurs (Température, Humidité, Consommation électrique, Niveau d'eau, Consommation de gaz) et 2 types d'actionneurs (Volets roulants, Lumières)
 
 **Question 6 :** Les ordres SQL permettant de créer au moins 2 capteurs/actionneurs :
-**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 115 à 116```
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 113 à 123```
+-- J'ai crée un capteur/actionneur pour chaque type et en l'associant à une pièce spécifique d'un logement
 
 **Question 7 :** Les ordres SQL permettant de créer au moins 2 mesures par capteur/actionneur :
-**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 121 à 122```
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 125 à 143```
+- J'ai ajouté 2 mesures par capteur/actionneur dans notre base de donnée
 
 **Question 8 :** Les ordres SQL permettant de créer au moins 4 factures :
-**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 127 à 128``` 
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 145 à 150```
+- J'ai crée 4 factures de types différents (Électricité, Eau, Gaz, Internet)
+
+### 1.2 Remplissage de la base de données 
 
