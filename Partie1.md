@@ -11,7 +11,7 @@
 - Un **Logement** peut aussi **générer aucune ou plusieurs Factures** *(0:N)*.
 
 **Question 2 :** Les ordres SQL permettant de détruire toutes les tables existantes dans notre base se trouve dans le fichier :
-**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)**
+**📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 15 à 20```
 - Cela est possible grâce à la commande ```DROP TABLE IF EXISTS nom_table```
 - Je me suis aidé des ressources présentes dans le cours de base de données sur Moodle.
 - Ce **[`site`](https://www.devart.com/dbforge/sql/studio/sql-server-drop-table.html)** m'a aussi aidé pour répondre à cette question, il présente les différentes façons d'utiliser DROP TABLE dans SQL.
