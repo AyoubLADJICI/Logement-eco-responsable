@@ -23,7 +23,7 @@ curl -X 'GET' \
   -H 'accept: application/json'
 
 #Commande permettant de supprimer une ligne spécifique à l'id dans la table Logement
-curl -X 'GET' \
+curl -X 'DELETE' \
   'http://127.0.0.1:8000/logements/{id}' \
   -H 'accept: application/json'
 
@@ -35,9 +35,9 @@ curl -X 'POST' \
   -H 'Content-Type: application/json' \
   -d '{
   "nom": "str",
-  "x": int,
-  "y": int,
-  "z": int,
+  "coord_x": int,
+  "coord_y": int,
+  "coord_z": int,
   "id_logement": int
 }'
 
@@ -92,15 +92,15 @@ curl -X 'POST' \
   "valeur_consommation": int
 }'
 
-
+#Commande permettant d'ajouter une ligne de donnée dans la table Mesure
 curl -X 'POST' \
   'http://127.0.0.1:8000/mesures/' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
-  "id": 0,
-  "id_capteur_actionneur": 33.5,
-  "valeur": 0,
+  "id_mesure": int,
+  "id_capteur_actionneur": int,
+  "valeur": int,
   "date_insertion": "CURRENT_TIMESTAMP"
 }
 }
