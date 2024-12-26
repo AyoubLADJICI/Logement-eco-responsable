@@ -23,6 +23,7 @@ J'ai suivi ce **[`tutoriel`](https://fastapi.tiangolo.com/tutorial/sql-databases
 
 ### 2.2 Exercice 2 : serveur web
 Dans cette partie, j'ai intégré un graphique à secteurs en 3D utilisant Google Charts et créé une interface utilisateur dynamique.
+
 📌 Technologies Utilisées :
 - FastAPI : Serveur Backend pour transmettre les données.
 - Google Charts : Génération du graphique en 3D.
