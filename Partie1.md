@@ -49,5 +49,12 @@
 **📁 [`logement.sql`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/logement.sql)** ```lignes 145 à 150```
 - J'ai crée 4 factures de types différents (Électricité, Eau, Gaz, Internet)
 
-### 1.2 Remplissage de la base de données 
+### 1.2 Remplissage de la base de données
+La fonction de remplissage se trouve dans le fichier : **📁 [`remplissage.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/remplissage.py)**
+-J'ai entré le prompt suivant ```Peux-tu m'aider à écrire une fonction Python pour insérer automatiquement des factures sur un nombre de jours et un logement que je pourrais choisir, en te connectant à ma base de données logement.db ? et en te basant sur la consommation des français pour chaque type de conso afin d'avoir des données réalistes``` sur ChatGPT.
+La fonction ajouter_factures permet d'ajouter des factures "réalistes" pour un logement donné sur une période définie (exemple 30 jours). Exemple : ```ajouter_factures(1, 30)```
+Les valeurs de consommation et les montants sont calculés en fonction des plages prédéfinies pour chaque type de consommation. La fonction fait également en sorte d'éviter les doublons en vérifiant les factures déjà présentes dans la base de données pour la même date et le même type.
+
+
+ 
 
