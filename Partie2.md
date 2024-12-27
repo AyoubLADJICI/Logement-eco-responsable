@@ -50,7 +50,7 @@ J'ai entré plusieurs prompts sur ChatGPT :
 - 2️⃣2ème prompt : ```Peux-tu ajouter une fonctionnalité permettant à l'utilisateur de basculer entre un tableau et un graphique Google Charts à l'aide de boutons ? ```
 - 3️⃣3ème prompt : ```Peux-tu améliorer l'interface avec du CSS, en ajoutant une barre de navigation et un joli arrière-plan ? ```
 
-Les ```lignes 295 à 337``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)** ont été écrite grâce au prompt1️⃣. Le fichier **[`meteo.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/meteo.html)** et **[`chart.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/meteo.css)** ont été entièrement écrit grâce au prompt 2️⃣ et 3️⃣.
+Les ```lignes 295 à 337``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)** ont été écrite grâce au prompt1️⃣. Le fichier **[`meteo.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/meteo.html)** et **[`meteo.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/meteo.css)** ont été entièrement écrit grâce au prompt 2️⃣ et 3️⃣.
 
 ### 2.4 Exercice 4 : intégration
 
