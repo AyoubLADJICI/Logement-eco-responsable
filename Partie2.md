@@ -24,12 +24,7 @@ J'ai suivi ce **[`tutoriel`](https://fastapi.tiangolo.com/tutorial/sql-databases
 ### 2.2 Exercice 2 : serveur web
 Dans cette partie, j'ai intégré un graphique à secteurs en 3D utilisant Google Charts et créé une interface utilisateur dynamique.
 
-📌 Technologies Utilisées :
-- FastAPI : Serveur Backend pour transmettre les données.
-- Google Charts : Génération du graphique en 3D.
-- HTML / CSS : Interface utilisateur et design.
-
-J'ai utilisé le code HTML permettant de créer un graphique à secteurs en 3D via ce **[`lien`](https://developers-dot-devsite-v2-prod.appspot.com/chart/interactive/docs/gallery/piechart)** 
+J'ai utilisé le code HTML permettant de créer un graphique à secteurs en 3D via ce **[`lien`](https://developers-dot-devsite-v2-prod.appspot.com/chart/interactive/docs/gallery/piechart)**.
 J'ai entré plusieurs prompts sur ChatGPT pour réaliser l'interface web et modifier le serveur pour l'envoi des données :
 
 - 1️⃣1er prompt : ```Peux-tu m'écrire une fonction Python permettant de récupérer les montants de factures et de calculer la somme pour chaque type de facture afin d'établir en pourcentage le montage pour chaque type divisé par le montant total ensuite il faudra modifier le code HTML pour prendre en compte les valeurs envoyés par notre serveur ? ```
@@ -41,17 +36,7 @@ J'ai entré plusieurs prompts sur ChatGPT pour réaliser l'interface web et modi
 - 4️⃣4ème prompt : ```Enfin, je te laisse la liberté de rendre le design plus agréable avec du CSS avec une image en background, en ajoutant des animations comme le survol du logo lorsqu'on clique dessus et d'ailleurs je souhaite que lorsqu'on clique sur le logo ça nous redirige vers la page d'accueil s'il te plaît ?```
 
 ### 2.3 Exercice 3 : météo
-Dans cet exercice, j'ai intégré une fonctionnalité permettant d'afficher les prévisions météo à 5 jours en utilisant l'API Open-Meteo et en donnant le choix à l'utilisateur d'afficher ces prévisisons soit sous forme de tableau ou bien de graphe.
-
-⚙️ Backend : Communication avec l'API Open-Meteo
-- Une fonction Python interroge l'API Open-Meteo avec les coordonnées GPS (latitude et longitude) fournies par l'utilisateur puis les données récupérées (température, humidité relative, précipitations) sont transformées en un format lisible (DataFrame).
-Endpoints :
-- /openmeteo/{latitude}/{longitude} : Retourne les données brutes au format JSON.
-- /openmeteo/ : Affiche les prévisions sous forme de tableau ou de graphique directement sur une page web.
-
-🖥️ Frontend : Interface Utilisateur
-
-- L'utilisateur doit saisir les coordonnées GPS (latitude, longitude) et il possède à sa disposition des boutons pour basculer entre l'affichage Tableau et Graphique.
+Dans cet exercice, j'ai intégré une fonctionnalité permettant d'afficher les prévisions météo à 5 jours en utilisant l'API Open-Meteo et en donnant le choix à l'utilisateur d'afficher ces prévisisons soit sous forme de tableau ou bien de graphe en saisissant préalablement les coordonnées GPS (latitude, longitude).
 
 Je me suis aidé du code Python de ce **[`site`](https://open-meteo.com/en/docs)** pour obtenir des données météorologiques pour une latitude et une longitude données en utilisant l'API Open-Meteo.
 
