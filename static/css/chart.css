@@ -1,4 +1,4 @@
-/* Styles généraux */
+/* 🌟 Styles Généraux */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -11,7 +11,8 @@ body {
     flex-direction: column;
 }
 
-/* Barre de Navigation avec Logo et Texte Centré */
+
+
 header {
     display: flex;
     align-items: center;
@@ -24,7 +25,16 @@ header {
     z-index: 1000;
 }
 
-/* Logo cliquable */
+/* 📝 Titre Centré */
+header h1 {
+    flex-grow: 1; /* Prend l'espace restant */
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    font-size: 1.8em;
+}
+
+
 header .logo img {
     height: 40px;
     width: auto;
@@ -33,33 +43,19 @@ header .logo img {
     transition: transform 0.3s ease-in-out;
 }
 
-header .logo img:hover {
-    transform: scale(1.1);
-}
-
-/* Titre Centré */
-header h1 {
-    flex-grow: 1;
-    text-align: center;
-    color: #fff;
-    margin: 0;
-    font-size: 1.8em;
-}
-
-/* Conteneur principal */
+/* 📦 Conteneur Principal */
 .container {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.95); 
     backdrop-filter: blur(5px);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     margin: 30px auto;
     text-align: center;
-    width: 95%;
-    max-width: 1200px; /* Limite pour les grands écrans */
+    animation: fadeInUp 0.8s ease-in-out;
 }
 
-/* Liste déroulante */
+/* 🔽 Liste Déroulante */
 .select-container {
     margin-bottom: 30px;
     text-align: center;
@@ -76,8 +72,7 @@ header h1 {
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
-    transition: border-color 0.3s, transform 0.2s;
-    animation: slideIn 1s ease-out;
+    transition: all 0.3s ease-in-out;
 }
 
 #logement_select:hover {
@@ -85,32 +80,68 @@ header h1 {
     transform: scale(1.05);
 }
 
-/* Camembert */
+/* 📊 Camembert Centré */
 #piechart_3d {
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; /* Centre horizontalement */
     width: 100%;
-    max-width: 900px; /* Taille maximale pour les grands écrans */
-    height: 500px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    background: #fff;
+    max-width: 900px; /* Largeur maximale */
+    height: 500px; /* Hauteur fixe */
     animation: fadeInUp 1s ease-in-out;
 }
 
-/* Pied de page */
+/* 🦶 Pied de Page */
 footer {
     background: #2c3e50;
     color: #fff;
     text-align: center;
     padding: 10px 0;
     font-size: 0.9em;
-    margin-top: auto;
+    margin-top: auto; /* Place le footer en bas */
     box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
 }
 
+/* 📌 Texte Clair du Pied de Page */
 footer p {
     margin: 0;
     font-size: 1em;
     letter-spacing: 0.5px;
+}
+
+/* 🎨 Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+    header .logo img {
+        height: 30px;
+    }
+    #piechart_3d {
+        height: 300px;
+    }
 }

@@ -55,12 +55,39 @@ body {
 }
 
 /* ⚙️ Fonctionnalités */
+/* ✅ Titres de Section en Gras */
 .section-header {
-    background: #ffffff;
+    background: #ffffff !important; /* Fond blanc uniforme */
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Effet d'ombre subtil */
     text-align: center;
     margin-bottom: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.section-header h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 0; /* Évite un espace inutile */
+}
+.contact-header h2 {
+    font-size: 2rem;
+    font-weight: bold; /* Rend le texte en gras */
+    color: #2c3e50; /* Assure une couleur uniforme */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: #555;
 }
 
 .feature-box,
@@ -82,6 +109,12 @@ body {
 .stats-section .stats-box h3 {
     font-size: 2rem;
     font-weight: bold;
+}
+
+.stats-header {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 📞 Section Contact */
@@ -189,13 +222,13 @@ body {
 
 /* 🦶 Pied de Page */
 .footer {
-    background: #2c3e50; /* Même couleur que la barre de navigation */
-    color: white; /* Texte blanc pour contraste */
+    background: #2c3e50;
+    color: white;
     text-align: center;
     padding: 15px 0;
     margin-top: 30px;
     font-size: 0.9em;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Légère ombre pour démarcation */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .footer p {

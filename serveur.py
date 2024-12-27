@@ -83,7 +83,9 @@ def get_session():
 SessionDep = Annotated[Session, Depends(get_session)]
 
 app = FastAPI()
+# Monter le dossier static pour servir les fichiers CSS
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
 # Creation des tables de la BDD au demarrage de l'application
 @app.on_event("startup")
 def on_startup():
@@ -340,7 +342,7 @@ async def display_open_meteo_data(request: Request):
 # Routes pour servir les pages HTML
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("accueil.html", {"request": request})
 
 @app.get("/confidentialite.html", response_class=HTMLResponse)
 async def confidentialite_page(request: Request):
