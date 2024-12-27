@@ -40,5 +40,27 @@ J'ai entré plusieurs prompts sur ChatGPT pour réaliser l'interface web et modi
 
 - 4️⃣4ème prompt : ```Enfin, je te laisse la liberté de rendre le design plus agréable avec du CSS avec une image en background, en ajoutant des animations comme le survol du logo lorsqu'on clique dessus et d'ailleurs je souhaite que lorsqu'on clique sur le logo ça nous redirige vers la page d'accueil s'il te plaît ?```
 
+### 2.3 Exercice 3 : météo
+Dans cet exercice, j'ai intégré une fonctionnalité permettant d'afficher les prévisions météo à 5 jours en utilisant l'API Open-Meteo et en donnant le choix à l'utilisateur d'afficher ces prévisisons soit sous forme de tableau ou bien de graphe.
+
+⚙️ Backend : Communication avec l'API Open-Meteo
+- Une fonction Python interroge l'API Open-Meteo avec les coordonnées GPS (latitude et longitude) fournies par l'utilisateur puis les données récupérées (température, humidité relative, précipitations) sont transformées en un format lisible (DataFrame).
+Endpoints :
+- /openmeteo/{latitude}/{longitude} : Retourne les données brutes au format JSON.
+- /openmeteo/ : Affiche les prévisions sous forme de tableau ou de graphique directement sur une page web.
+
+🖥️ Frontend : Interface Utilisateur
+
+- L'utilisateur doit saisir les coordonnées GPS (latitude, longitude) et il possède à sa disposition des boutons pour basculer entre l'affichage Tableau et Graphique.
+
+J'ai entré plusieurs prompts sur ChatGPT : 
+
+- 1️⃣1er prompt  : ```Peux-tu m'écrire une fonction Python pour interroger l'API Open-Meteo et afficher les prévisions à 5 jours sous forme de tableau et de graphique ? ```
+- 2️⃣2ème prompt : ```Peux-tu ajouter une fonctionnalité permettant à l'utilisateur de basculer entre un tableau et un graphique Google Charts à l'aide de boutons ? ```
+- 3️⃣3ème prompt : ```Peux-tu améliorer l'interface avec du CSS, en ajoutant une barre de navigation et un joli arrière-plan ? ```
+
+
+
+
 
  
