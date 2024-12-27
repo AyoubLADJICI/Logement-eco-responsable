@@ -217,7 +217,6 @@ def delete_type_capteur_actionneur(id_type_capteur_actionneur: int, session: Ses
     session.commit()
     return {"ok": True}
 
-
 # Endpoints pour Mesure
 @app.post("/mesures/")
 def create_mesure(mesure: Mesure, session: SessionDep):
@@ -292,8 +291,7 @@ async def chart_factures(request: Request, session: SessionDep, id_logement: int
         "chart.html",
         {"request": request, "data": data, "logements": logements_list, "selected_id": id_logement}
     )
-
-
+    
 def fetch_open_meteo_weather(latitude, longitude):
     try:
         url = "https://api.open-meteo.com/v1/forecast"
@@ -379,6 +377,11 @@ def get_statistics(session: SessionDep):
         "num_mesures": num_mesures,
     }
 
+@app.get("/api/logements")
+def get_logements(session: SessionDep):
+    logements = session.exec(select(Logement)).all()
+    return [{"id_logement": logement.id_logement, "adresse": logement.adresse_postale} for logement in logements]
+
 @app.get("/api/consommation")
 def get_consumption_data(session: SessionDep, logement_id: Optional[int] = None):
     # Calculer la date de 7 jours en arrière
@@ -402,12 +405,6 @@ def get_consumption_data(session: SessionDep, logement_id: Optional[int] = None)
             "date": facture.date_facture       # Date de la facture
         })
     return data
-
-@app.get("/api/logements")
-def get_logements(session: SessionDep):
-    logements = session.exec(select(Logement)).all()
-    return [{"id_logement": logement.id_logement, "adresse": logement.adresse_postale} for logement in logements]
-
 
 @app.get("/api/pieces_capteurs")
 def get_pieces_capteurs(logement_id: int, session: SessionDep):

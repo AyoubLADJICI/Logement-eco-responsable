@@ -1,13 +1,13 @@
 # TP IoT - Logement Éco-Responsable
 
 ## 🌐 HTML/CSS/Javascript
-Dans cette partie, j'ai développé mon site avec une page accueil et 4 autres onglets présentant la consommation (électricité, eau, gaz et Internet), l'état des différents capteurs/actionneurs, les économies réalisées par rapport au mois précédent, la configuration permettant d'ajouter un nouveau logement, de nouveaux capteurs/actionneurs.
+Dans cette partie, j'ai développé mon site avec une page d'accueil et 4 autres onglets présentant la consommation (électricité, eau, gaz et Internet), l'état des différents capteurs/actionneurs, les économies réalisées par rapport au mois précédent, la configuration permettant d'ajouter un nouveau logement, de nouveaux capteurs/actionneurs.
 
-Dans le fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**, les lignes 340 à 363 définissent plusieurs routes dans notre application, chacune renvoyant une page HTML lorsqu'on essaie d'y accéder, cela est possible grâce à notre moteur de templates Jinja2. J'ai utilisé le prompt suivant sur ChatGPT : ```Peux-tu m'écrire des fonctions Python permettant de retourner des pages HTML pour chaque onglet de notre application ? en utilisant le moteur Jinja2 stp```
+Dans le fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**, les lignes 340 à 363 définissent plusieurs routes dans notre application, chacune renvoyant une page HTML lorsqu'on essaie d'y accéder, cela est possible grâce à notre moteur de templates Jinja2. J'ai utilisé le prompt suivant sur ChatGPT : ```Peux-tu m'écrire des fonctions Python permettant de retourner des pages HTML pour chaque onglet de notre application ? en utilisant le moteur Jinja2 s'il te plaît```
 
 👉 La page d'accueil est accessible sur : http://127.0.0.1:8000/
 
-📑Les sections ont été organisés de la façon suivante:
+📝 Structure de la page Accueil :
 - Une barre de navigation fixe en haut de la page, avec le logo centré et les onglets de navigation à gauche et à droite.
 - Intégration d'un widget météo adaptatif provenant de ce **[`site`](https://weatherwidget.org/fr/)** et affiche les prévisions météo en temps réel de notre localisation actuelle et s'adapte automatiquement à l'écran. Cela concerne les ```lignes 34 à 35``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)**. 
 - Une section d'accueil avec un message de bienvenue et une courte description, placée dans une bloc vert centré.
@@ -37,4 +37,21 @@ L'intégralité du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Lo
 
 7️⃣ CSS général :
 - "Pour finaliser notre page, ajoute du style CSS pour chaque section avec des effets de survol et peux-tu essayer de le rendre responsive ?" Cela concerne l'intégralité du fichier **[`accueil.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/accueil.css)**.
+
+👉 L'onglet consommation est accessible sur : http://127.0.0.1:8000/consommation
+
+📝 Structure de la page Consommation :
+- Une barre de navigation fixe en haut de la page avec le logo centré, onglets à gauche (Accueil, Consommation) et à droite (État des capteurs, Économies, Configuration)
+- Nous avons un sélecteur permettant de choisir un logement pour afficher ses données spécifiques
+- 3 Boutons : Graphiques en Temps Réel (qui affiche des courbes de consommation de chaque type), Graphique en Camembert des montants par type de fatcure sur 7 jours, Graphique en Camembert des factures depuis le début (renvoie vers le le lien suivant : ```http://127.0.0.1:8000/factures/chart``` en ouvrant un nouvel onglet)
+
+L'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/consommation.html)** et **[`consommation.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/consommation.css)** ont été écrits à l'aide de 3 prompts sur ChatGPT.
+
+1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer la liste des logements de ma base, avec leur ID et adresse comme ça je pourrai les afficher sur mon site après ?" Cela concerne les ```lignes 380 à 383``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
+"Peux-tu écrire une fonction Python pour récupérer les données de consommation des 7 derniers jours, avec une option pour filtrer les données en fonction de l'id du logement ?" Cela concerne les ```lignes 385 à 407``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
+
+2️⃣ HTML: "Peux-tu créer une page HTML en essayant de garder le même style que pour la page d'accueil mais ici je veux que tu ajoutes un sélecteur de logement, des graphiques interactifs (courbes et camembert) sur les valeurs de consommation depuis ma base de données pour chaque type (Electricite, Eau, Gaz, Internet) et également un bouton qui renvoie le précédent site que j'avais crée ```http://127.0.0.1:8000/factures/chart``` dans un nouvel onglet ?" Cela concerne l'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/consommation.html)**.
+
+3️⃣ CSS : "Peux-tu ajouter du style CSS pour rendre cette page responsive en gardant le même style que la page d'Accueil ?" cela concerne l'intégralité du fichier **[`consommation.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/consommation.css)**.
+
 

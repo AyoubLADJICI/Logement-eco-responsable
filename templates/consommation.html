@@ -4,49 +4,70 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consommation</title>
-  <link rel="stylesheet" href="/static/css/styles.css"> <!-- Fichier CSS global -->
-  <link rel="stylesheet" href="/static/css/consommation.css"> <!-- Fichier CSS spécifique -->
+  <link rel="stylesheet" href="/static/css/consommation.css?v=1.2"> <!-- Fichier CSS spécifique -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-    <h1 style="color:rgb(0, 128, 0)"><a class="navbar-brand fw-bold" href="/">Econnect Home</a></h1>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link" href="/consommation">Consommation</a></li>
-        <li class="nav-item"><a class="nav-link" href="/etat_capteurs">État des capteurs</a></li>
-        <li class="nav-item"><a class="nav-link" href="/economies">Économies</a></li>
-        <li class="nav-item"><a class="nav-link" href="/configuration">Configuration</a></li>
-      </ul>
+   <!-- 🚀 Barre de Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
+    <div class="container-fluid">
+      <!-- Onglets Gauche -->
+      <div class="nav-left navbar-nav">
+        <a class="nav-link" href="/">Accueil</a>
+        <a class="nav-link active" href="/consommation">Consommation</a>
+      </div>
+       <!-- Logo Centré -->
+      <a class="navbar-brand logo-container mx-auto" href="/">
+        <img src="/static/images/logo.png" alt="Logo Econnect Home">
+      </a>
+
+      <!-- Onglets Droite -->
+      <div class="nav-right navbar-nav">
+        <a class="nav-link" href="/etat_capteurs">État des capteurs</a>
+        <a class="nav-link" href="/economies">Économies</a>
+        <a class="nav-link" href="/configuration">Configuration</a>
+      </div>
+    </div>
+
+      <!-- Bouton Hamburger pour Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
   </nav>
 
   <div class="container mt-5">
-    <h1 class="text-center">Consommation</h1>
+    <h1 class="text-center">📊 Consommation</h1>
     <p class="text-center">Visualisez les données de consommation en temps réel ou sous forme de camembert.</p>
 
     <!-- Liste déroulante pour sélectionner un logement -->
     <div class="container mt-3">
-      <h3 class="text-center">Choisissez un logement :</h3>
+      <h3 class="text-center">🏠 Choisissez un logement :</h3>
       <select id="logement-selector" class="form-select mb-4">
-        <option value="" disabled selected>-- Sélectionnez un logement --</option>
+      <option value="" disabled selected>-- Sélectionnez un logement --</option>
       </select>
     </div>
 
     <!-- Conteneur pour les boutons (masqué par défaut) -->
     <div id="graph-buttons" class="text-center mb-4" style="display: none;">
-      <button id="line-charts-btn" class="button btn1">Graphiques en Temps Réel</button>
-      <button id="pie-charts-btn" class="button btn2">Graphique en Camembert</button>
+      <button id="line-charts-btn" class="btn btn-primary">Graphiques en Temps Réel</button>
+      <button id="pie-charts-btn" class="btn btn-secondary">Graphique en Camembert des Factures sur les 7 derniers jours</button>
+      <!-- Bouton pour accéder au graphique global des factures -->
+      <div class="text-center mt-4">
+        <a href="http://127.0.0.1:8000/factures/chart" class="btn btn-info" target="_blank" rel="noopener noreferrer">
+          Graphique en Camembert des Factures depuis le début
+        </a>
+      </div>
     </div>
 
     <!-- Conteneurs pour les graphiques -->
     <div id="charts-container" style="width: 100%;"></div>
   </div>
+   <!-- 🦶 Pied de Page -->
+   <footer class="footer text-center py-3">
+    <p>&copy; 2024 Econnect Home. Tous droits réservés.</p>
+  </footer>
 
   <script>
     // Charger Google Charts
@@ -136,7 +157,7 @@
       data.addRows(groupedData);
 
       const options = {
-        title: 'Répartition des montants par type',
+        title: 'Répartition des montants par type de facture sur les 7 derniers jours',
         is3D: true,
         height: 500,
       };
