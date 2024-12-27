@@ -37,7 +37,7 @@ Pour développer l'interface, j'ai entré plusieurs prompts sur ChatGPT :
 
 - 4️⃣4ème prompt : ```Enfin, je te laisse la liberté de rendre le design plus agréable avec du CSS avec une image en background, en ajoutant des animations comme le survol du logo lorsqu'on clique dessus et d'ailleurs je souhaite que lorsqu'on clique sur le logo ça nous redirige vers la page d'accueil s'il te plaît ?```
 
-Les ```lignes 263 à 292``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)** a été écrite grâce au prompt1️⃣. Le fichier **[`chart.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/chart.html)** et **[`chart.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/chart.css)** ont été entièrement écrit grâce au prompt 2️⃣,3️⃣et4️⃣. Par ailleurs, le **[`logo`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/images/logo.png)** de notre site a été généré par Grok, un chat d'intelligence artificielle accessible gratuitement sur X (anciennement Twitter).
+Les ```lignes 263 à 292``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)** ont été écrite grâce au prompt1️⃣. Le fichier **[`chart.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/chart.html)** et **[`chart.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/chart.css)** ont été entièrement écrit grâce au prompt 2️⃣,3️⃣et4️⃣. Par ailleurs, le **[`logo`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/images/logo.png)** de notre site a été généré par Grok, un chat d'intelligence artificielle accessible gratuitement sur X (anciennement Twitter).
 
 ### 2.3 Exercice 3 : météo
 Dans cet exercice, j'ai intégré une fonctionnalité permettant d'afficher les prévisions météo à 5 jours en utilisant l'API Open-Meteo et en donnant le choix à l'utilisateur d'afficher ces prévisisons soit sous forme de tableau ou bien de graphe en saisissant préalablement les coordonnées GPS (latitude, longitude) accessible via ce lien : http://127.0.0.1:8000/openmeteo/
@@ -49,6 +49,8 @@ J'ai entré plusieurs prompts sur ChatGPT :
 - 1️⃣1er prompt  : ```Peux-tu m'écrire une fonction Python pour interroger l'API Open-Meteo et afficher les prévisions à 5 jours sous forme de tableau et de graphique ? ```
 - 2️⃣2ème prompt : ```Peux-tu ajouter une fonctionnalité permettant à l'utilisateur de basculer entre un tableau et un graphique Google Charts à l'aide de boutons ? ```
 - 3️⃣3ème prompt : ```Peux-tu améliorer l'interface avec du CSS, en ajoutant une barre de navigation et un joli arrière-plan ? ```
+
+Les ```lignes 295 à 337``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)** ont été écrite grâce au prompt1️⃣. Le fichier **[`meteo.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/meteo.html)** et **[`chart.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/meteo.css)** ont été entièrement écrit grâce au prompt 2️⃣ et 3️⃣.
 
 ### 2.4 Exercice 4 : intégration
 
