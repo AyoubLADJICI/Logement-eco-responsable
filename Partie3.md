@@ -17,16 +17,22 @@ L'intégralité du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Lo
 
 1️⃣ Barre de navigation et pied de page :
 - "Peux-tu créer une barre de navigation avec notre logo (celui que je t'ai envoyé précédemment) centré et des onglets à gauche (Accueil, Consommation) et à droite (État des capteurs, Économies, Configuration) dans le fichier accueil.html ? Et aussi si tu peux aussi ajouter un pied de page de la même couleur que la barre de navigation"
+
 2️⃣ Widget météo :
 - "J'ai récupéré ce code html (..) qui permet d'afficher les données météo en temps réel de notre localisation actuelle, comment je peux l'intégrer dans mon code ?"
+
 3️⃣ Section d'accueil :
 - "Peux-tu ajouter une section d'accueil avec un texte de bienvenue centré dans un bloc vert s'il te plaît ?"
+
 4️⃣ Section fonctionnalités :
 - "Maintenant, peux-tu ajouter des blocs pour présenter les fonctionnalités principales de notre application ?"
+
 5️⃣ Section statistiques :
 - "Peux-tu créer une section pour afficher des statistiques comme le nombre de logements, de types de capteurs/actionneurs, de capteurs/actionneurs installés et de mesures enregistrées avec des couleurs distinctes ?"
+
 6️⃣ Section contact :
 - "Pour le fun, peux-tu créer une section contact avec un formulaire et une boîte d'informations alignée en t'inspirant d'autres sites comme celui du messervices.etudiant.gouv.fr ? et rajoute une politique de confidentialité un peu marrante qu'on pourra écrire dans le fichier **[`condidentialite.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/consommation.html)**
+
 7️⃣ CSS général :
 - "Pour finaliser notre page, ajoute du style CSS pour chaque section avec des effets de survol et peux-tu essayer de le rendre responsive ?"
 
