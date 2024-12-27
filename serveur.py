@@ -1,17 +1,12 @@
 from typing import Annotated,Optional, List
-from fastapi import Depends, FastAPI, HTTPException, Query, Request
+from fastapi import Depends, FastAPI, HTTPException, Query, Request, Form
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 import requests
 import pandas as pd
 from retry_requests import retry
-from fastapi.responses import JSONResponse
-import matplotlib.pyplot as plt
-from io import BytesIO
-import base64
 from fastapi.staticfiles import StaticFiles
-import matplotlib.dates as mdates
 from datetime import datetime, timedelta 
 
 # Configuration des templates
@@ -28,9 +23,9 @@ class Logement(SQLModel, table=True):
 class Piece(SQLModel, table=True):
     id_piece : int = Field(default = None, primary_key = True)
     nom : str = Field(index=True)
-    x : int = Field(index=True)
-    y : int = Field(index=True)
-    z : int = Field(index=True)
+    coord_x : int = Field(index=True)
+    coord_y : int = Field(index=True)
+    coord_z : int = Field(index=True)
     id_logement : int = Field(index=True) 
 
 class Capteur_Actionneur(SQLModel, table=True):
@@ -50,13 +45,13 @@ class Type_Capteur_Actionneur(SQLModel, table=True):
     max_valeur : float = Field(index=True)
  
 class Mesure(SQLModel, table=True):
-    id: int = Field(default=None, primary_key=True)
+    id_mesure: int = Field(default=None, primary_key=True)
     id_capteur_actionneur: int
     valeur: float
     date_insertion: Optional[str] = Field(default="CURRENT_TIMESTAMP", nullable=False)
 
 class Facture(SQLModel, table=True):
-    id: int = Field(default=None, primary_key=True)
+    id_facture: int = Field(default=None, primary_key=True)
     id_logement: int = Field(index=True)
     type_facture: str = Field(index=True)
     date_facture: Optional[str] = Field(default="CURRENT_TIMESTAMP", nullable=False)
@@ -65,10 +60,13 @@ class Facture(SQLModel, table=True):
 
 # Creation de notre moteur SQLModel 
 # pour permettre a notre code de se connecter a notre base de donnees
-sqlite_file_name = "database.db"
+sqlite_file_name = "logement.db"
 sqlite_url = f"sqlite:///{sqlite_file_name}"
 
-connect_args = {"check_same_thread" : False}
+#L'utilisation de check_same_thread=False permet à FastAPI d'utiliser la même base de données SQLite dans différents threads
+#Ceci est nécessaire car une seule requête peut utiliser plus d'un thread (par exemple dans les dépendances)
+#toutefois FastAPI s'assure qu'une session SQLModel distincte est créée pour chaque requête HTTP
+connect_args = {"check_same_thread" : False} 
 engine = create_engine(sqlite_url, connect_args=connect_args)    
 
 # Fonction permettant de creer les tables pour
@@ -76,7 +74,7 @@ engine = create_engine(sqlite_url, connect_args=connect_args)
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
-# Fonction permettant de stocker ls objets en memoire
+# Fonction permettant de stocker les objets en memoire
 # Utilise le moteur pour communiquer avec la BDD
 def get_session():
     with Session(engine) as session:
@@ -155,11 +153,17 @@ def delete_piece(id_piece: int, session: SessionDep):
 
 # Endpoints pour Capteur_Actionneur
 @app.post("/capteur_actionneur/")
-def create_capteur_actionneur(capteur_actionneur: Capteur_Actionneur, session: SessionDep):
-    session.add(capteur_actionneur)
-    session.commit()
-    session.refresh(capteur_actionneur)
-    return capteur_actionneur
+def create_capteurs_actionneurs(capteurs: List[Capteur_Actionneur], session: SessionDep):
+    try:
+        for capteur in capteurs:
+            session.add(capteur)
+        session.commit()
+        for capteur in capteurs:
+            session.refresh(capteur)
+        return {"message": "Capteurs ajoutés avec succès"}
+    except Exception as e:
+        session.rollback()
+        raise HTTPException(status_code=400, detail=f"Erreur lors de l'ajout des capteurs : {str(e)}")
 
 @app.get("/capteurs_actionneurs/")
 def read_capteurs_actionneurs(session: SessionDep, offset: int = 0, limit: Annotated[int, Query(le=100)] = 100):
@@ -257,9 +261,16 @@ def delete_facture(id: int, session: SessionDep):
     return {"ok": True}
 
 @app.get("/factures/chart", response_class=HTMLResponse)
-async def chart_factures(request: Request, session: SessionDep):
-    # Récupération de toutes les factures
-    factures = session.exec(select(Facture)).all()
+async def chart_factures(request: Request, session: SessionDep, id_logement: int = None):
+    """
+    Affiche les factures sous forme de camembert 3D.
+    Si id_logement est fourni, filtre les factures par logement.
+    """
+    query = select(Facture)
+    if id_logement:
+        query = query.where(Facture.id_logement == id_logement)
+
+    factures = session.exec(query).all()
 
     # Regrouper par type et sommer les montants
     totals = {}
@@ -271,7 +282,15 @@ async def chart_factures(request: Request, session: SessionDep):
     for type_facture, total in totals.items():
         data.append([type_facture, total])
 
-    return templates.TemplateResponse("chart.html", {"request": request, "data": data})
+    # Récupérer la liste des logements pour la liste déroulante
+    logements = session.exec(select(Logement.id_logement, Logement.adresse_postale)).all()
+    logements_list = [{"id": logement[0], "adresse": logement[1]} for logement in logements]
+
+    return templates.TemplateResponse(
+        "chart.html",
+        {"request": request, "data": data, "logements": logements_list, "selected_id": id_logement}
+    )
+
 
 def fetch_open_meteo_weather(latitude, longitude):
     try:
@@ -311,118 +330,21 @@ def get_open_meteo_weather(latitude: float, longitude: float):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Erreur interne : {str(e)}")
 
-    
-@app.get("/openmeteo/{latitude}/{longitude}/page", response_class=HTMLResponse)
-def display_open_meteo_weather(latitude: float, longitude: float, request: Request):
-    try:
-        data = fetch_open_meteo_weather(latitude, longitude)
-        return templates.TemplateResponse(
-            "meteo.html", {"request": request, "data": data.to_dict(orient="records")}
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    
-
-
-@app.get("/openmeteo/{latitude}/{longitude}/graph", response_class=HTMLResponse)
-def display_weather_graph_separate(latitude: float, longitude: float):
-    try:
-        # Récupérer les données météo
-        data = fetch_open_meteo_weather(latitude, longitude)
-
-        # Convertir les dates
-        dates = pd.to_datetime(data["date"])
-        temperatures = data["temperature_2m"]
-        humidity = data["relative_humidity_2m"]
-        rain = data["rain"]
-
-        # Création du premier graphique : Températures et Humidité
-        fig1, ax1 = plt.subplots(figsize=(10, 6))
-        ax1.plot(dates, temperatures, label="Température (°C)", color="red", linewidth=2)
-        ax1.plot(dates, humidity, label="Humidité Relative (%)", color="blue", linestyle="--")
-        ax1.set_title("Température et Humidité Relative", fontsize=16)
-        ax1.set_xlabel("Date", fontsize=12)
-        ax1.set_ylabel("Valeurs", fontsize=12)
-        ax1.legend(loc="upper right", fontsize=10)
-        ax1.tick_params(axis="x", rotation=45)
-        plt.tight_layout()
-
-        # Sauvegarder le premier graphique dans un buffer
-        buf1 = BytesIO()
-        plt.savefig(buf1, format="png")
-        buf1.seek(0)
-        image_base64_1 = base64.b64encode(buf1.read()).decode("utf-8")
-        buf1.close()
-
-        # Création du deuxième graphique : Précipitations
-        fig2, ax2 = plt.subplots(figsize=(10, 6))
-        ax2.bar(dates, rain, color="gray", label="Pluie (mm)", alpha=0.6)
-        ax2.set_title("Précipitations", fontsize=16)
-        ax2.set_xlabel("Date", fontsize=12)
-        ax2.set_ylabel("Précipitations (mm)", fontsize=12)
-        ax2.legend(loc="upper right", fontsize=10)
-        ax2.tick_params(axis="x", rotation=45)
-        plt.tight_layout()
-
-        # Sauvegarder le deuxième graphique dans un buffer
-        buf2 = BytesIO()
-        plt.savefig(buf2, format="png")
-        buf2.seek(0)
-        image_base64_2 = base64.b64encode(buf2.read()).decode("utf-8")
-        buf2.close()
-
-        # Retourner les deux graphiques dans une page HTML
-        return f"""
-        <html>
-            <body>
-                <center><h1>Graphiques des Prévisions Météo</h1></center>
-                <center><h2>Température et Humidité Relative</h2></center>
-                <center><img src="data:image/png;base64,{image_base64_1}" /></center>
-                <center><h2>Précipitations</h2></center>
-                <center><img src="data:image/png;base64,{image_base64_2}" /></center>
-            </body>
-        </html>
-        """
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erreur lors de la génération des graphiques : {str(e)}")
-    
-@app.post("/capteurs/temperature")
-def receive_temperature(data: dict, session: SessionDep):
+@app.get("/openmeteo/", response_class=HTMLResponse)
+async def display_open_meteo_data(request: Request):
     """
-    Reçoit une température depuis l'ESP8266 et prend une décision.
+    Affiche la page HTML pour saisir les coordonnées et afficher les données météo en tableau.
     """
-    # Extraction de la température envoyée
-    temperature = data.get("temperature")
-    if temperature is None:
-        raise HTTPException(status_code=400, detail="Donnée 'temperature' manquante.")
-
-    # Enregistrement dans la table `Mesure`
-    mesure = Mesure(
-        id_capteur_actionneur=1,  # ID du capteur de température, à adapter si nécessaire
-        valeur=temperature
-    )
-    session.add(mesure)
-    session.commit()
-
-    # Logique de déclenchement de l'action en fonction du seuil
-    seuil_temperature = 25.0  # Seuil pour la température
-    if temperature > seuil_temperature:
-        action = "LED_ON"
-        print(f"Température {temperature}°C détectée, action : {action}")
-    else:
-        action = "LED_OFF"
-        print(f"Température {temperature}°C détectée, action : {action}")
-
-    # Retourner l'action au client (ESP)
-    return {"action": action, "temperature": temperature}
-
-# Configurer les fichiers statiques
-#app.mount("/static", StaticFiles(directory="static"), name="static")
+    return templates.TemplateResponse("meteo.html", {"request": request})
 
 # Routes pour servir les pages HTML
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/confidentialite.html", response_class=HTMLResponse)
+async def confidentialite_page(request: Request):
+    return templates.TemplateResponse("confidentialite.html", {"request": request})
 
 @app.get("/consommation", response_class=HTMLResponse)
 async def consommation(request: Request):
@@ -478,8 +400,6 @@ def get_consumption_data(session: SessionDep, logement_id: Optional[int] = None)
             "date": facture.date_facture       # Date de la facture
         })
     return data
-
-
 
 @app.get("/api/logements")
 def get_logements(session: SessionDep):

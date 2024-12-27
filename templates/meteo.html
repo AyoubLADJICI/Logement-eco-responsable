@@ -1,44 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Prévisions météo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        table {
-            width: 80%;
-            margin: auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prévisions Météo</title>
+  <link rel="stylesheet" href="/static/css/meteo.css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+    google.charts.load('current', {packages: ['corechart']});
+
+    let weatherData = [];
+
+    async function fetchWeather() {
+      const latitude = document.getElementById('latitude').value;
+      const longitude = document.getElementById('longitude').value;
+
+      if (!latitude || !longitude) {
+        alert('Veuillez saisir la latitude et la longitude.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`/openmeteo/${latitude}/${longitude}`);
+        weatherData = await response.json();
+
+        document.getElementById('view-buttons').style.display = 'block';
+        displayTable(); // Affiche par défaut en tableau
+
+      } catch (error) {
+        console.error('Erreur lors de la récupération des données météo :', error);
+        document.getElementById('weather').innerHTML = `<p>Impossible de charger les données météo.</p>`;
+      }
+    }
+
+    function displayTable() {
+      let tableContent = `
+        <h3>Prévisions Météo à 5 jours</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date & Heure</th>
+              <th>Température (°C)</th>
+              <th>Humidité Relative (%)</th>
+              <th>Pluie (mm)</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      for (let i = 0; i < weatherData.length; i++) {
+        tableContent += `
+          <tr>
+            <td>${weatherData[i].date}</td>
+            <td>${weatherData[i].temperature_2m}</td>
+            <td>${weatherData[i].relative_humidity_2m}</td>
+            <td>${weatherData[i].rain}</td>
+          </tr>
+        `;
+      }
+      tableContent += `</tbody></table>`;
+      document.getElementById('weather').innerHTML = tableContent;
+    }
+
+    function displayGraph() {
+      if (!weatherData.length) {
+        alert('Aucune donnée météo disponible.');
+        return;
+      }
+
+      const dates = weatherData.map(entry => entry.date);
+      const temperatures = weatherData.map(entry => entry.temperature_2m);
+      const humidity = weatherData.map(entry => entry.relative_humidity_2m);
+      const rain = weatherData.map(entry => entry.rain);
+
+      const data = new google.visualization.DataTable();
+      data.addColumn('string', 'Date & Heure');
+      data.addColumn('number', 'Température (°C)');
+      data.addColumn('number', 'Humidité Relative (%)');
+      data.addColumn('number', 'Pluie (mm)');
+
+      for (let i = 0; i < weatherData.length; i++) {
+        data.addRow([dates[i], temperatures[i], humidity[i], rain[i]]);
+      }
+
+      const options = {
+        title: 'Prévisions Météo à 5 jours',
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        width: '100%',
+        height: 500
+      };
+
+      const chart = new google.visualization.LineChart(document.getElementById('weather'));
+      chart.draw(data, options);
+    }
+  </script>
 </head>
 <body>
-    <center><h1>Prévisions météo</h1></center>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Température (°C)</th>
-            <th>Humidité Relative (%)</th>
-            <th>Pluie (mm)</th>
-        </tr>
-        {% for row in data %}
-        <tr>
-            <td>{{ row.date }}</td>
-            <td>{{ row.temperature_2m }}</td>
-            <td>{{ row.relative_humidity_2m }}</td>
-            <td>{{ row.rain }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+  <!-- En-tête avec logo -->
+  <header>
+    <a href="/" class="logo">
+      <img src="/static/images/logo.png" alt="Logo">
+    </a>
+    <h1>🌦️ Prévisions Météo</h1>
+  </header>
+  
+  <!-- Conteneur principal -->
+  <div class="container">
+    <div class="select-container">
+      <label>Latitude :</label>
+      <input type="text" id="latitude" placeholder="48.8566">
+      <label>Longitude :</label>
+      <input type="text" id="longitude" placeholder="2.3522">
+      <button onclick="fetchWeather()">Obtenir la Météo</button>
+    </div>
+
+    <!-- Boutons pour basculer entre Tableau et Graphique -->
+    <div id="view-buttons" style="display: none; margin-bottom: 20px;">
+      <button onclick="displayTable()">Afficher en Tableau</button>
+      <button onclick="displayGraph()">Afficher en Graphique</button>
+    </div>
+
+    <div id="weather" class="weather-container">Les données météo s'afficheront ici...</div>
+  </div>
+  
+  <!-- Pied de page -->
+  <footer>
+    © 2024 Econnect Home - Prévisions Météo
+  </footer>
 </body>
 </html>
