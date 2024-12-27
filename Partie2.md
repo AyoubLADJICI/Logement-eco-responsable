@@ -53,6 +53,8 @@ Endpoints :
 
 - L'utilisateur doit saisir les coordonnées GPS (latitude, longitude) et il possède à sa disposition des boutons pour basculer entre l'affichage Tableau et Graphique.
 
+Je me suis aidé du code Python de ce **[`site`](https://open-meteo.com/en/docs)** pour obtenir des données météorologiques pour une latitude et une longitude données en utilisant l'API Open-Meteo.
+
 J'ai entré plusieurs prompts sur ChatGPT : 
 
 - 1️⃣1er prompt  : ```Peux-tu m'écrire une fonction Python pour interroger l'API Open-Meteo et afficher les prévisions à 5 jours sous forme de tableau et de graphique ? ```
