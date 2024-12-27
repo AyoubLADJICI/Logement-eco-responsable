@@ -13,7 +13,7 @@ J'ai suivi ce **[`tutoriel`](https://fastapi.tiangolo.com/tutorial/sql-databases
 - Le développement de route (Create, Read, Update, Delete) pour chaque table.
 - Chaque table dispose des opérations suivantes : GET, POST, DELETE
 
-L'interaction de notre base de donnée avec le serveur se trouve dans le fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)** ont été écrit grâce au tutoriel.
+L'interaction de notre base de donnée avec le serveur se trouve dans le fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)** et les ```lignes 16 à 261``` ont pu être écrites grâce au **[`tutoriel`](https://fastapi.tiangolo.com/tutorial/sql-databases/)**.
 
 💻 Nous pouvons lancer l'application en tapant la commande suivante sur le terminal : ```fastapi dev serveur.py```
 - 🚀 Serveur accessible sur : http://127.0.0.1:8000/
