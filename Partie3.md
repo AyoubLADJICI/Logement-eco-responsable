@@ -3,7 +3,9 @@
 ## 🌐 HTML/CSS/Javascript
 Dans cette partie, j'ai développé mon site avec une page accueil et 4 autres onglets présentant la consommation (électricité, eau, gaz et Internet), l'état des différents capteurs/actionneurs, les économies réalisées par rapport au mois précédent, la configuration permettant d'ajouter un nouveau logement, de nouveaux capteurs/actionneurs.
 
-La page d'accueil est accessible sur : http://127.0.0.1:8000/
+Dans le fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**, les lignes 340 à 363 définissent plusieurs routes dans notre application, chacune renvoyant une page HTML lorsqu'on essaie d'y accéder, cela est possible grâce à notre moteur de templates Jinja2. J'ai utilisé le prompt suivant sur ChatGPT : ```Peux-tu m'écrire des fonctions Python permettant de retourner des pages HTML pour chaque onglet de notre application ? en utilisant le moteur Jinja2 stp```
+
+👉 La page d'accueil est accessible sur : http://127.0.0.1:8000/
 
 📑Les sections ont été organisés de la façon suivante:
 - Une barre de navigation fixe en haut de la page, avec le logo centré et les onglets de navigation à gauche et à droite.
@@ -25,7 +27,7 @@ L'intégralité du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Lo
 - "Peux-tu ajouter une section d'accueil avec un texte de bienvenue centré dans un bloc vert s'il te plaît ?"  Cela concerne les ```lignes 38 à 43``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)**.
 
 4️⃣ Section fonctionnalités :
-- "Maintenant, peux-tu ajouter des blocs pour présenter les fonctionnalités principales de notre application ?" Cela concerne les ```lignes 46 à 75``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)**.
+- "Maintenant, peux-tu ajouter des blocs pour présenter les fonctionnalités principales de notre application ?" Cela concerne les ```lignes 46 à 75``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)** + "Peux-tu écrire une fonction Python qui récupère les statistiques tels que le nombre de logement, de types de capteurs/actionneurs, de capteurs/actionneurs installés et de mesures enregistrées dans ma base de donnée pour pouvoir les afficher sur ma page HTML ?" Cela concerne les ```lignes 365 à 378``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
 
 5️⃣ Section statistiques :
 - "Peux-tu créer une section pour afficher des statistiques comme le nombre de logements, de types de capteurs/actionneurs, de capteurs/actionneurs installés et de mesures enregistrées avec des couleurs distinctes ?"  Cela concerne les ```lignes 77 à 108``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)**.
