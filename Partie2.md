@@ -22,10 +22,10 @@ J'ai suivi ce **[`tutoriel`](https://fastapi.tiangolo.com/tutorial/sql-databases
 - Le fichier **[`liste_commande_curl.txt`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/liste_commande_curl.txt)** contient une liste complète des commandes curl permettant d'alimenter la base de données.
 
 ### 2.2 Exercice 2 : serveur web
-Dans cette partie, j'ai intégré un graphique à secteurs en 3D utilisant Google Charts et créé une interface utilisateur dynamique.
+Dans cette partie, j'ai intégré un graphique à secteurs en 3D utilisant Google Charts et créé une interface utilisateur dynamique accessible via ce lien : http://127.0.0.1:8000/factures/chart
 
-J'ai utilisé le code HTML permettant de créer un graphique à secteurs en 3D via ce **[`lien`](https://developers-dot-devsite-v2-prod.appspot.com/chart/interactive/docs/gallery/piechart)**.
-J'ai entré plusieurs prompts sur ChatGPT pour réaliser l'interface web et modifier le serveur pour l'envoi des données :
+J'ai suivi la documentation officielle pour les graphiques à secteurs en 3D disponible **[`ici`](https://developers-dot-devsite-v2-prod.appspot.com/chart/interactive/docs/gallery/piechart)**.
+Pour développer l'interface, j'ai entré plusieurs prompts sur ChatGPT :
 
 - 1️⃣1er prompt : ```Peux-tu m'écrire une fonction Python permettant de récupérer les montants de factures et de calculer la somme pour chaque type de facture afin d'établir en pourcentage le montage pour chaque type divisé par le montant total ensuite il faudra modifier le code HTML pour prendre en compte les valeurs envoyés par notre serveur ? ```
 
@@ -36,9 +36,9 @@ J'ai entré plusieurs prompts sur ChatGPT pour réaliser l'interface web et modi
 - 4️⃣4ème prompt : ```Enfin, je te laisse la liberté de rendre le design plus agréable avec du CSS avec une image en background, en ajoutant des animations comme le survol du logo lorsqu'on clique dessus et d'ailleurs je souhaite que lorsqu'on clique sur le logo ça nous redirige vers la page d'accueil s'il te plaît ?```
 
 ### 2.3 Exercice 3 : météo
-Dans cet exercice, j'ai intégré une fonctionnalité permettant d'afficher les prévisions météo à 5 jours en utilisant l'API Open-Meteo et en donnant le choix à l'utilisateur d'afficher ces prévisisons soit sous forme de tableau ou bien de graphe en saisissant préalablement les coordonnées GPS (latitude, longitude).
+Dans cet exercice, j'ai intégré une fonctionnalité permettant d'afficher les prévisions météo à 5 jours en utilisant l'API Open-Meteo et en donnant le choix à l'utilisateur d'afficher ces prévisisons soit sous forme de tableau ou bien de graphe en saisissant préalablement les coordonnées GPS (latitude, longitude) accessible via ce lien : http://127.0.0.1:8000/openmeteo/
 
-Je me suis aidé du code Python de ce **[`site`](https://open-meteo.com/en/docs)** pour obtenir des données météorologiques pour une latitude et une longitude données en utilisant l'API Open-Meteo.
+J'ai suivi la documentation officielle de l'**[`API Open-Meteo`](https://open-meteo.com/en/docs)** pour obtenir les données météorologiques pour une latitude et une longitude donnée.  
 
 J'ai entré plusieurs prompts sur ChatGPT : 
 
@@ -46,7 +46,7 @@ J'ai entré plusieurs prompts sur ChatGPT :
 - 2️⃣2ème prompt : ```Peux-tu ajouter une fonctionnalité permettant à l'utilisateur de basculer entre un tableau et un graphique Google Charts à l'aide de boutons ? ```
 - 3️⃣3ème prompt : ```Peux-tu améliorer l'interface avec du CSS, en ajoutant une barre de navigation et un joli arrière-plan ? ```
 
-
+### 2.4 Exercice 4 : intégration
 
 
 
