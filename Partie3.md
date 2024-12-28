@@ -99,7 +99,7 @@ L'intégralité du fichier **[`economies.html`](https://github.com/AyoubLADJICI/
 
 2️⃣ HTML: "Peux-tu créer une section HTML pour afficher une liste de logements avec des boutons pour ajouter, modifier en remplissant un formulaire dans une boîte de dialogue et supprimer chaque logement ? Fais aussi la même pour les pièces de chaque logement et rajoute une dernière section pour ajouter des capteurs/actionneurs"  Cela concerne l'intégralité du fichier **[`configuration.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/configuration.html)**. 
 
-3️⃣ CSS : "Peux-tu rajouter un fichier css pour le rendre beau à voir et bien évidemment responsive comme les précédents onglets ?" Cela concerne l'intégralité du fichier **[`configuration.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/configuration.css)**.
+3️⃣ CSS : "Peux-tu rajouter un fichier css pour le rendre beau à voir et bien évidemment responsive comme les précédents onglets ?" Cela concerne l'intégralité du fichier **[`configuration.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/configuration.css)**.
 
 
 
