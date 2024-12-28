@@ -8,6 +8,8 @@ import pandas as pd
 from retry_requests import retry
 from fastapi.staticfiles import StaticFiles
 from datetime import datetime, timedelta 
+from sqlalchemy.sql import func
+
 
 # Configuration des templates
 templates = Jinja2Templates(directory="templates")
@@ -452,6 +454,44 @@ def toggle_capteur(capteur_id: int, session: SessionDep):
     session.refresh(capteur)
 
     return {"success": True, "etat": capteur.etat}
+
+@app.get("/api/economies")
+def get_economies(logement_id: int, session: SessionDep):
+    data = {
+        "electricite": [],
+        "eau": [],
+        "gaz": [],
+        "internet": []
+    }
+
+    query = select(
+        func.strftime("%Y-%m", Facture.date_facture).label("mois"),
+        Facture.type_facture,
+        func.sum(Facture.montant).label("montant")
+    ).where(Facture.id_logement == logement_id).group_by("mois", Facture.type_facture)
+
+    results = session.exec(query).all()
+    previous_totals = {}
+
+    for mois, type_facture, montant in results:
+        economie = 0
+        if type_facture in previous_totals:
+            economie = ((previous_totals[type_facture] - montant) / previous_totals[type_facture]) * 100
+        previous_totals[type_facture] = montant
+
+        data[type_facture.lower()].append({
+            "mois": mois,
+            "montant": montant,
+            "economie": round(economie, 2)
+        })
+
+    return data
+
+
+
+
+
+
 
 
 

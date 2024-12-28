@@ -1,0 +1,62 @@
+/* 🌟 Styles Généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 🛠️ Barre de Navigation */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #2c3e50 !important;
+}
+
+.navbar-brand img {
+    height: 50px;
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #81d4fa !important;
+}
+
+/* ✅ Conteneur Principal */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* 📊 Section Résumé */
+#summary-container {
+    margin: 20px 0;
+    font-size: 1.1em;
+}
+
+/* 📈 Graphiques */
+#chart-container {
+    margin-top: 40px;
+}
+
+/* 🦶 Pied de Page */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto;
+}

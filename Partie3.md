@@ -69,5 +69,28 @@ L'intégralité du fichier **[`etat_capteurs.html`](https://github.com/AyoubLADJ
 
 2️⃣ HTML: "Peux-tu créer une page HTML gardant le même style que les précédents onglets et permettant de sélectionner un logement depuis une liste déroulante et d'afficher les pièces associées avec leurs capteurs ? Chaque capteur doit afficher son état ON/OFF avec un bouton Activer/Désactiver pour le basculer. Et rajoute une fonctionnalité qui permet de conserver l'état de ma page lorsque je le rafrachis ça veut dire que si le capteur de mon salon est activer alors le bouton pour désactiver ne se réinitialise pas quand je clique sur F5" Cela concerne l'intégralité du fichier **[`etat_capteurs.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/etat_capteurs.html)**.
 
-3️⃣ CSS : "Peux-tu ajouter du style CSS pour bien organiser les différents blocs, les boutons ON/OFF et rendre la page responsive tout en conservant le style général de la page d'accueil ?" Cela concerne l'intégralité du fichier **[`etat_capteurs.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/etat_capteurs.css)**
+3️⃣ CSS : "Peux-tu ajouter du style CSS pour bien organiser les différents blocs, les boutons ON/OFF et rendre la page responsive tout en conservant le style général de la page d'accueil ?" Cela concerne l'intégralité du fichier **[`etat_capteurs.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/etat_capteurs.css)**.
+
+👉 L'onglet Économies est accessible sur : http://127.0.0.1:8000/economies
+
+📝 Structure de la page Économies :
+- Une barre de navigation fixe en haut de la page avec le logo centré, des onglets à gauche (Accueil, Consommation) et à droite (État des capteurs, Économies, Configuration).
+- Un menu déroulant permettant de choisir un logement spécifique afin d'afficher les données correspondantes.
+- Un graphique à barres affichant l'évolution du montant payé par mois pour chaque type de consommation
+- 4 tableaux séparés affichent les détails des économies pour chaque type de consommation : électricité, eau, gaz et Internet
+
+L'intégralité du fichier **[`economies.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/economies.html)** et **[`economies.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/economies.css)** ont été écrits à l'aide de plusieurs prompts sur ChatGPT.
+
+1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer les montants payé chaque mois et par type de facture afin de pouvoir établir le pourcentage d'économie par rapport au mois précédent." Cela concerne les ```lignes 458 à 488``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
+
+2️⃣ HTML: "Peux-tu ajouter un sélecteur permettant de choisir un logement et afficher les montants payés chaque mois par type de facture dans un graphique à barre ? Puis l'afficher avec 4 tableaux distincts et indiquer le pourcentage d'économie par rapport au mois précédent" Cela concerne l'intégralité du fichier **[`economies.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/economies.html)**. 
+
+3️⃣ CSS : "Peux-tu rajouter un fichier css pour le rendre beau à voir et bien évidemment responsive comme les précédents onglets ?" Cela concerne l'intégralité du fichier **[`economies.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/economies.css)**.
+
+
+
+
+
+
+
 

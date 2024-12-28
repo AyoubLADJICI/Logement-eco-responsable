@@ -3,52 +3,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Économies réalisées</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <title>Économies</title>
+  <link rel="stylesheet" href="/static/css/economies.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Econnect Home</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+  <!-- 🚀 Barre de Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
+    <div class="container-fluid">
+      <!-- Onglets Gauche -->
+      <div class="nav-left navbar-nav">
+        <a class="nav-link" href="/">Accueil</a>
+        <a class="nav-link" href="/consommation">Consommation</a>
+      </div>
+      <!-- Logo Centré -->
+      <a class="navbar-brand logo-container mx-auto" href="/">
+        <img src="/static/images/logo.png" alt="Logo Econnect Home">
+      </a>
+      <!-- Onglets Droite -->
+      <div class="nav-right navbar-nav">
+        <a class="nav-link" href="/etat_capteurs">État des capteurs</a>
+        <a class="nav-link active" href="/economies">Économies</a>
+        <a class="nav-link" href="/configuration">Configuration</a>
+      </div>
+    </div>
+    <!-- Bouton Hamburger pour Mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link" href="/consommation">Consommation</a></li>
-        <li class="nav-item"><a class="nav-link" href="/etat_capteurs">État des capteurs</a></li>
-        <li class="nav-item"><a class="nav-link" href="/economies">Économies</a></li>
-        <li class="nav-item"><a class="nav-link" href="/configuration">Configuration</a></li>
-      </ul>
-    </div>
   </nav>
-  <div class="container mt-5">
-    <h1>Économies réalisées</h1>
-    <div id="economies_chart" style="width: 100%; height: 500px;"></div>
+
+  <!-- 🏠 Sélecteur de logement -->
+  <div class="container mt-3">
+    <h3 class="text-center">🏠 Choisissez un logement :</h3>
+    <select id="logement-selector" class="form-select mb-4">
+      <option value="" disabled selected>-- Sélectionnez un logement --</option>
+    </select>
   </div>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <!-- 📝 Résumé des Économies -->
+  <div class="container mt-5 text-center">
+    <h1>💡 Économies</h1>
+    <p>Analysez vos économies réalisées par rapport au mois précédent.</p>
+  </div>
+
+  <!-- 📊 Graphique à Barres -->
+  <div class="container mt-5">
+    <h3 class="text-center">📊 Évolution des Économies</h3>
+    <div id="chart-container" style="height: 500px;"></div>
+  </div>
+
+  <!-- 📑 Tableaux des Économies par Type -->
+  <div class="container mt-5">
+    <h3 class="text-center">📑 Détails des Économies</h3>
+
+    <!-- 🟦 Tableau Électricité -->
+    <h4 class="mt-4 text-primary">🔌 Électricité</h4>
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th>Mois</th>
+          <th>Montant (€)</th>
+          <th>Économie (%)</th>
+        </tr>
+      </thead>
+      <tbody id="table-electricite"></tbody>
+    </table>
+
+    <!-- 🟦 Tableau Eau -->
+    <h4 class="mt-4 text-primary">💧 Eau</h4>
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th>Mois</th>
+          <th>Montant (€)</th>
+          <th>Économie (%)</th>
+        </tr>
+      </thead>
+      <tbody id="table-eau"></tbody>
+    </table>
+
+    <!-- 🟦 Tableau Gaz -->
+    <h4 class="mt-4 text-primary">🔥 Gaz</h4>
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th>Mois</th>
+          <th>Montant (€)</th>
+          <th>Économie (%)</th>
+        </tr>
+      </thead>
+      <tbody id="table-gaz"></tbody>
+    </table>
+
+    <!-- 🟦 Tableau Internet -->
+    <h4 class="mt-4 text-primary">🌐 Internet</h4>
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <th>Mois</th>
+          <th>Montant (€)</th>
+          <th>Économie (%)</th>
+        </tr>
+      </thead>
+      <tbody id="table-internet"></tbody>
+    </table>
+  </div>
+
+  <!-- 🦶 Pied de Page -->
+  <footer class="footer text-center py-3">
+    <p>&copy; 2024 Econnect Home. Tous droits réservés.</p>
+  </footer>
+
+  <!-- 📊 JavaScript -->
   <script>
     google.charts.load('current', { packages: ['corechart'] });
-    google.charts.setOnLoadCallback(drawEconomiesChart);
 
-    function drawEconomiesChart() {
-      var data = google.visualization.arrayToDataTable([
-        ['Mois', 'Avant installation', 'Après installation'],
-        ['Janvier', 120, 90],
-        ['Février', 150, 110],
-        ['Mars', 130, 95],
-        ['Avril', 140, 100]
-      ]);
+  // 🏠 Charger les logements
+  fetch('/api/logements')
+    .then(response => response.json())
+    .then(logements => {
+      const logementSelector = document.getElementById('logement-selector');
+      logements.forEach(logement => {
+        const option = document.createElement('option');
+        option.value = logement.id_logement;
+        option.textContent = logement.adresse;
+        logementSelector.appendChild(option);
+      });
+    })
+    .catch(error => console.error('Erreur lors du chargement des logements :', error));
 
-      var options = {
-        title: 'Comparaison des consommations avant et après installation',
-        vAxis: { title: 'Consommation (kWh)' },
-        legend: { position: 'bottom' }
-      };
-
-      var chart = new google.visualization.ColumnChart(document.getElementById('economies_chart'));
-      chart.draw(data, options);
+  // 🎯 Écouter la sélection du logement
+  document.getElementById('logement-selector').addEventListener('change', event => {
+    const logementId = event.target.value;
+    if (logementId) {
+      fetch(`/api/economies?logement_id=${logementId}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            drawChart(data);
+            fillTables(data);
+          } else {
+            console.warn('Aucune donnée reçue pour ce logement.');
+          }
+        })
+        .catch(error => console.error('Erreur lors du chargement des données :', error));
     }
+  });
+
+  // 📊 Graphique à barres
+  function drawChart(data) {
+    const chartData = new google.visualization.DataTable();
+    chartData.addColumn('string', 'Mois');
+    chartData.addColumn('number', 'Électricité');
+    chartData.addColumn('number', 'Eau');
+    chartData.addColumn('number', 'Gaz');
+    chartData.addColumn('number', 'Internet');
+
+    const moisSet = new Set();
+    Object.keys(data).forEach(type => {
+      data[type].forEach(item => moisSet.add(item.mois));
+    });
+
+    const rows = Array.from(moisSet).map(mois => [
+      mois,
+      data.electricite.find(item => item.mois === mois)?.montant || 0,
+      data.eau.find(item => item.mois === mois)?.montant || 0,
+      data.gaz.find(item => item.mois === mois)?.montant || 0,
+      data.internet.find(item => item.mois === mois)?.montant || 0
+    ]);
+
+    chartData.addRows(rows);
+
+    const options = {
+      title: 'Évolution des Montants par Mois',
+      height: 400,
+      legend: { position: 'bottom' },
+      hAxis: { title: 'Mois' },
+      vAxis: { title: 'Montant (€)' }
+    };
+
+    const chart = new google.visualization.ColumnChart(document.getElementById('chart-container'));
+    chart.draw(chartData, options);
+  }
+
+  // 📑 Remplir les tableaux
+  function fillTables(data) {
+    const fillTable = (type, tableId) => {
+      const tableBody = document.getElementById(tableId);
+      tableBody.innerHTML = '';
+      data[type].forEach(row => {
+        tableBody.innerHTML += `
+          <tr>
+            <td>${row.mois}</td>
+            <td>${row.montant.toFixed(2)} €</td>
+            <td>${row.economie.toFixed(2)} %</td>
+          </tr>
+        `;
+      });
+    };
+
+    fillTable('electricite', 'table-electricite');
+    fillTable('eau', 'table-eau');
+    fillTable('gaz', 'table-gaz');
+    fillTable('internet', 'table-internet');
+  }
+
   </script>
 </body>
 </html>
