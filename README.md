@@ -6,7 +6,7 @@ Ce projet IoT vise à développer une application permettant de gérer un logeme
 - 🔌 Surveillance de la consommation énergétique
 - 📡 Gestion des capteurs et actionneurs
 - 💰 Affichage des économies réalisées
-- ⚙️ Configuration pour gérer les logements, pièces et équipements
+- ⚙️ Configuration pour gérer les logements, pièces et équipements (capteurs/actionneurs)
   
 L'application est construite avec FastAPI pour le backend, HTML/CSS/JavaScript pour le frontend, et SQLite pour la base de données.
 
