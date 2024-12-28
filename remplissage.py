@@ -117,8 +117,8 @@ def ajouter_mesures(nb_jours):
     print(f"✅ Mesures ajoutées sur les {nb_jours} derniers jours pour tous les capteurs/actionneurs.")
 
 #Appel des fonctions
-#ajouter_factures(13, 10)
-#ajouter_mesures(30)
+ajouter_factures(13, 10)
+ajouter_mesures(30)
 
 # Validation des modifications
 conn.commit()
