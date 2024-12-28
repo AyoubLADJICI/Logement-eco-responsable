@@ -1,0 +1,194 @@
+/* 🌟 Styles Généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 🛠️ Barre de Navigation */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #2c3e50 !important;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    height: 50px;
+    width: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.1);
+}
+
+.navbar-nav .nav-link {
+    font-weight: bold;
+    color: #fff !important;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #81d4fa !important;
+}
+
+/* ✅ Conteneur Principal */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin: 30px auto;
+    text-align: center;
+    flex: 1; /* Pousse le footer en bas */
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* 📊 Sélecteur de Logement */
+#logement-selector {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    margin-top: 20px;
+    transition: border-color 0.3s ease, transform 0.2s ease;
+}
+
+#logement-selector:hover {
+    border-color: #2980b9;
+    transform: scale(1.05);
+}
+
+/* 🏠 Cartes des Pièces */
+.card {
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* 💡 Capteurs dans chaque pièce */
+.card-body {
+    padding: 20px;
+}
+
+.card-body div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.card-body div:last-child {
+    border-bottom: none;
+}
+
+.card-body span {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Boutons Activer/Désactiver */
+.toggle-capteur-btn {
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.toggle-capteur-btn.btn-danger {
+    background-color: #dc3545; /* Rouge pour Désactiver */
+    color: white;
+}
+
+.toggle-capteur-btn.btn-success {
+    background-color: #28a745; /* Vert pour Activer */
+    color: white;
+}
+
+.toggle-capteur-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* 🦶 Pied de Page */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto;
+    font-size: 0.9em;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer p {
+    margin: 0;
+    color: #ffffff !important;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+    .navbar-nav .nav-link {
+        margin: 0 5px;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #logement-selector {
+        font-size: 0.9em;
+    }
+
+    .card-header {
+        font-size: 1em;
+    }
+
+    .toggle-capteur-btn {
+        font-size: 0.8em;
+    }
+}

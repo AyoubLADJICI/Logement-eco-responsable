@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camembert des Factures</title>
+  
+  <!-- Lien vers le fichier CSS -->
+  <link rel="stylesheet" href="/static/css/chart.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- Google Charts -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", { packages: ["corechart"] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable({{ data | tojson }});
+
+        var options = {
+          title: "Répartition des Montants par Type de Facture",
+          is3D: true,
+          width: 900,
+          height: 500,
+          backgroundColor: '#f9fafc',
+          titleTextStyle: {
+            fontSize: 20,
+            bold: true,
+            color: '#333'
+          }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById("piechart_3d"));
+        chart.draw(data, options);
+    }
+
+    function onLogementChange() {
+      const selectedId = document.getElementById("logement_select").value;
+      const baseUrl = `/factures/chart`;
+      const url = selectedId ? `${baseUrl}?id_logement=${selectedId}` : baseUrl;
+      window.location.href = url;
+  }
+  </script>
+</head>
+<body>
+  <!-- 🛠️ Barre de Navigation -->
+  <header>
+    <a href="/" class="logo">
+        <img src="/static/images/logo.png" alt="Logo Econnect Home">
+    </a>
+    <h1>📊 Camembert des factures</h1>
+</header>
+  
+  <!-- Conteneur principal -->
+  <div class="container">
+    <div class="select-container">
+      <label for="logement_select">Choisissez un logement :</label>
+      <select id="logement_select" onchange="onLogementChange()">
+        <option value="" disabled selected>-- Sélectionnez un logement --</option>
+        {% for logement in logements %}
+            <option value="{{ logement.id }}" {% if logement.id == selected_id %}selected{% endif %}>
+                {{ logement.adresse }}
+            </option>
+        {% endfor %}
+      </select>
+    </div>
+    <div id="piechart_3d"></div>
+  </div>
+  
+  <!-- Pied de page -->
+  <footer>
+    © 2024 - Application de Gestion des Factures par Logement
+  </footer>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consommation</title>
+  <link rel="stylesheet" href="/static/css/consommation.css?v=1.2"> <!-- Fichier CSS spécifique -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+   <!-- 🚀 Barre de Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
+    <div class="container-fluid">
+      <!-- Onglets Gauche -->
+      <div class="nav-left navbar-nav">
+        <a class="nav-link" href="/">Accueil</a>
+        <a class="nav-link active" href="/consommation">Consommation</a>
+      </div>
+       <!-- Logo Centré -->
+      <a class="navbar-brand logo-container mx-auto" href="/">
+        <img src="/static/images/logo.png" alt="Logo Econnect Home">
+      </a>
+
+      <!-- Onglets Droite -->
+      <div class="nav-right navbar-nav">
+        <a class="nav-link" href="/etat_capteurs">État des capteurs</a>
+        <a class="nav-link" href="/economies">Économies</a>
+        <a class="nav-link" href="/configuration">Configuration</a>
+      </div>
+    </div>
+
+      <!-- Bouton Hamburger pour Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h1 class="text-center">📊 Consommation</h1>
+    <p class="text-center">Visualisez les données de consommation en temps réel ou sous forme de camembert.</p>
+
+    <!-- Liste déroulante pour sélectionner un logement -->
+    <div class="container mt-3">
+      <h3 class="text-center">🏠 Choisissez un logement :</h3>
+      <select id="logement-selector" class="form-select mb-4">
+      <option value="" disabled selected>-- Sélectionnez un logement --</option>
+      </select>
+    </div>
+
+    <!-- Conteneur pour les boutons (masqué par défaut) -->
+    <div id="graph-buttons" class="text-center mb-4" style="display: none;">
+      <button id="line-charts-btn" class="btn btn-primary">Graphiques en Temps Réel</button>
+      <button id="pie-charts-btn" class="btn btn-secondary">Graphique en Camembert des Factures sur les 7 derniers jours</button>
+      <!-- Bouton pour accéder au graphique global des factures -->
+      <div class="text-center mt-4">
+        <a href="http://127.0.0.1:8000/factures/chart" class="btn btn-info" target="_blank" rel="noopener noreferrer">
+          Graphique en Camembert des Factures depuis le début
+        </a>
+      </div>
+    </div>
+
+    <!-- Conteneurs pour les graphiques -->
+    <div id="charts-container" style="width: 100%;"></div>
+  </div>
+   <!-- 🦶 Pied de Page -->
+   <footer class="footer text-center py-3">
+    <p>&copy; 2024 Econnect Home. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    // Charger Google Charts
+    google.charts.load('current', { packages: ['corechart'] });
+
+    let consumptionData = [];
+    const logementSelector = document.getElementById("logement-selector");
+    const graphButtons = document.getElementById("graph-buttons");
+
+    // Charger la liste des logements depuis l'API
+    fetch('/api/logements')
+      .then(response => response.json())
+      .then(logements => {
+        logements.forEach(logement => {
+          const option = document.createElement("option");
+          option.value = logement.id_logement;
+          option.textContent = logement.adresse;
+          logementSelector.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Erreur lors de la récupération des logements :', error));
+
+    // Réagir au changement de sélection de logement
+    logementSelector.addEventListener("change", (event) => {
+      const selectedLogementId = event.target.value; // ID du logement sélectionné
+      if (selectedLogementId) {
+        graphButtons.style.display = "block"; // Afficher les boutons
+        fetchConsommationData(selectedLogementId); // Charger les données pour ce logement
+      }
+    });
+
+    // Fonction pour récupérer les données de consommation en fonction du logement
+    function fetchConsommationData(logementId) {
+      fetch(`/api/consommation?logement_id=${logementId}`)
+        .then(response => response.json())
+        .then(data => {
+          consumptionData = data; // Mettre à jour les données globales
+          drawLineCharts(); // Redessiner les graphiques en temps réel par défaut
+        })
+        .catch(error => console.error('Erreur lors de la récupération des données de consommation :', error));
+    }
+
+    // Basculer entre les types de graphiques
+    document.getElementById('line-charts-btn').addEventListener('click', drawLineCharts);
+    document.getElementById('pie-charts-btn').addEventListener('click', drawPieChart);
+
+    // Fonction pour réinitialiser le conteneur de graphiques
+    function resetChartsContainer(mode) {
+      const container = document.getElementById('charts-container');
+      container.innerHTML = ''; // Vide le conteneur principal
+      
+      if (mode === 'line') {
+        container.innerHTML = `
+          <div id="electricity-chart" style="width: 100%; height: 500px;"></div>
+          <div id="water-chart" style="width: 100%; height: 500px; margin-top: 20px;"></div>
+          <div id="gas-chart" style="width: 100%; height: 500px; margin-top: 20px;"></div>
+          <div id="internet-chart" style="width: 100%; height: 500px; margin-top: 20px;"></div>
+        `;
+      }
+    }
+
+    // Dessiner les graphiques en lignes pour chaque type
+    function drawLineCharts() {
+      resetChartsContainer('line');
+      drawChart('Electricite', 'electricity-chart', 'Consommation d\'électricité (kWh)', 'line');
+      drawChart('Eau', 'water-chart', 'Consommation d\'eau (m³)', 'line');
+      drawChart('Gaz', 'gas-chart', 'Consommation de gaz (kWh/m³)', 'line');
+      drawChart('Internet', 'internet-chart', 'Consommation Internet (Go)', 'line');
+    }
+
+    // Dessiner un graphique en camembert regroupant tous les types
+    function drawPieChart() {
+      resetChartsContainer();
+      const data = new google.visualization.DataTable();
+      data.addColumn('string', 'Type');
+      data.addColumn('number', 'Montant');
+      
+      const groupedData = consumptionData.reduce((acc, item) => {
+        const existing = acc.find(row => row[0] === item.type);
+        if (existing) {
+          existing[1] += item.montant; // Utiliser le montant
+        } else {
+          acc.push([item.type, item.montant]); // Ajouter le montant
+        }
+        return acc;
+      }, []);
+      data.addRows(groupedData);
+
+      const options = {
+        title: 'Répartition des montants par type de facture sur les 7 derniers jours',
+        is3D: true,
+        height: 500,
+      };
+
+      const chart = new google.visualization.PieChart(document.getElementById('charts-container'));
+      chart.draw(data, options);
+    }
+
+    // Fonction pour dessiner un graphique spécifique
+    function drawChart(type, containerId, title, chartType) {
+      const data = new google.visualization.DataTable();
+
+      if (chartType === 'line') {
+        data.addColumn('string', 'Date');
+        data.addColumn('number', type);
+
+        const filteredData = consumptionData
+          .filter(item => item.type === type)
+          .map(item => [item.date, item.consommation]);
+
+        data.addRows(filteredData);
+
+        const options = {
+          title: title,
+          curveType: 'function',
+          legend: { position: 'bottom' },
+          height: 500,
+        };
+
+        const chart = new google.visualization.LineChart(document.getElementById(containerId));
+        chart.draw(data, options);
+      }
+    }
+  </script>
+</body>
+</html>

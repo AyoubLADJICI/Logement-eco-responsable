@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>État des Capteurs</title>
+  <link rel="stylesheet" href="/static/css/etat_capteurs.css?v=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <!-- 🚀 Barre de Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
+    <div class="container-fluid">
+      <!-- Onglets Gauche -->
+      <div class="nav-left navbar-nav">
+        <a class="nav-link" href="/">Accueil</a>
+        <a class="nav-link" href="/consommation">Consommation</a>
+      </div>
+
+      <!-- Logo Centré -->
+      <a class="navbar-brand logo-container mx-auto" href="/">
+        <img src="/static/images/logo.png" alt="Logo Econnect Home">
+      </a>
+
+      <!-- Onglets Droite -->
+      <div class="nav-right navbar-nav">
+        <a class="nav-link active" href="/etat_capteurs">État des capteurs</a>
+        <a class="nav-link" href="/economies">Économies</a>
+        <a class="nav-link" href="/configuration">Configuration</a>
+      </div>
+
+      <!-- Bouton Hamburger pour Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ✅ Contenu Principal -->
+  <div class="container mt-5">
+    <h1 class="text-center">📡 État des Capteurs</h1>
+    <p class="text-center">Sélectionnez un logement pour afficher les capteurs par pièce.</p>
+
+    <!-- Liste déroulante pour sélectionner un logement -->
+    <div class="container mt-3">
+      <h3 class="text-center">🏠 Choisissez un logement :</h3>
+      <select id="logement-selector" class="form-select mb-4">
+        <option value="" disabled selected>-- Sélectionnez un logement --</option>
+      </select>
+    </div>
+
+    <!-- Conteneur pour afficher les pièces et capteurs -->
+    <div id="pieces-container" class="container mt-4"></div>
+  </div>
+
+  <!-- 🦶 Pied de Page -->
+  <footer class="footer text-center py-3">
+    <p>&copy; 2024 Econnect Home. Tous droits réservés.</p>
+  </footer>
+
+  <!-- ✅ JavaScript -->
+  <script>
+    // Charger la liste des logements depuis l'API
+    fetch('/api/logements')
+      .then(response => response.json())
+      .then(logements => {
+        const logementSelector = document.getElementById('logement-selector');
+        logements.forEach(logement => {
+          const option = document.createElement("option");
+          option.value = logement.id_logement;
+          option.textContent = logement.adresse;
+          logementSelector.appendChild(option);
+        });
+      })
+      .catch(error => console.error('Erreur lors de la récupération des logements :', error));
+
+    // Réagir au changement de sélection de logement
+    document.getElementById('logement-selector').addEventListener("change", (event) => {
+      const selectedLogementId = event.target.value;
+      if (selectedLogementId) {
+        fetch(`/api/pieces_capteurs?logement_id=${selectedLogementId}`)
+          .then(response => response.json())
+          .then(data => afficherPiecesEtCapteurs(data))
+          .catch(error => console.error('Erreur lors de la récupération des données :', error));
+      }
+    });
+
+    // Fonction pour afficher les pièces et leurs capteurs
+    function afficherPiecesEtCapteurs(data) {
+      const piecesContainer = document.getElementById('pieces-container');
+      piecesContainer.innerHTML = ''; // Réinitialiser le conteneur
+    
+      data.forEach(piece => {
+        const pieceDiv = document.createElement('div');
+        pieceDiv.classList.add('card', 'mb-3');
+        pieceDiv.innerHTML = `
+          <div class="card-header bg-primary text-white">${piece.nom}</div>
+          <div class="card-body">
+            ${piece.capteurs.map(capteur => `
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <span>${capteur.nom} (${capteur.reference_commerciale})</span>
+                <button class="btn btn-${capteur.etat === 'ON' ? 'danger' : 'success'} toggle-capteur-btn"
+                        data-capteur-id="${capteur.id_capteur_actionneur}">
+                  ${capteur.etat === 'ON' ? 'Désactiver' : 'Activer'}
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        piecesContainer.appendChild(pieceDiv);
+      });
+    
+      // Ajouter les événements aux boutons
+      document.querySelectorAll('.toggle-capteur-btn').forEach(button => {
+        button.addEventListener('click', () => {
+          const capteurId = button.dataset.capteurId;
+          toggleCapteur(capteurId, button);
+        });
+      });
+    }
+    
+
+// Fonction pour basculer l'état du capteur
+function toggleCapteur(capteurId, button) {
+  fetch(`/api/capteur_toggle/${capteurId}`, { method: 'POST' })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        button.classList.toggle('btn-danger');
+        button.classList.toggle('btn-success');
+        button.textContent = data.etat === 'ON' ? 'Désactiver' : 'Activer';
+        button.className = `btn btn-${data.etat === 'ON' ? 'danger' : 'success'} toggle-capteur-btn`;
+      }
+    })
+    .catch(error => console.error('Erreur lors de la mise à jour du capteur :', error));
+}
+
+  </script>
+</body>
+</html>

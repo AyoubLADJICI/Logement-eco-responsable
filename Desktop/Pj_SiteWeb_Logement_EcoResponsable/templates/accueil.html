@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Econnect Home - Accueil</title>
+  <link rel="stylesheet" href="/static/css/accueil.css"> <!-- Fichier CSS personnalisé -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+  <!-- 🚀 Barre de Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
+    <div class="container-fluid">
+      <!-- Onglets Gauche -->
+      <div class="nav-left navbar-nav">
+        <a class="nav-link" href="/">Accueil</a>
+        <a class="nav-link" href="/consommation">Consommation</a>
+      </div>
+
+      <!-- Logo Centré -->
+      <a class="navbar-brand logo-container mx-auto" href="/">
+        <img src="/static/images/logo.png" alt="Logo Econnect Home">
+      </a>
+
+      <!-- Onglets Droite -->
+      <div class="nav-right navbar-nav">
+        <a class="nav-link active" href="/etat_capteurs">État des capteurs</a>
+        <a class="nav-link" href="/economies">Économies</a>
+        <a class="nav-link" href="/configuration">Configuration</a>
+      </div>
+
+      <!-- Bouton Hamburger pour Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="ww_6bd0b37981eba" v='1.3' loc='auto' a='{"t":"responsive","lang":"fr","sl_lpl":1,"ids":[],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'>Plus de prévisions: <a href="https://oneweather.org/fr/paris/20_jours/" id="ww_6bd0b37981eba_u" target="_blank">20 jours previsions meteo</a></div>
+  <script async src="https://app3.weatherwidget.org/js/?id=ww_6bd0b37981eba"></script>
+
+   <!-- 🌟 Section d'Accueil -->
+   <header class="hero-section text-center text-white d-flex align-items-center justify-content-center">
+    <div class="hero-text welcome-box">
+      <h1>Bienvenue sur Econnect Home</h1>
+      <p class="lead">Un site moderne pour gérer de manière éco-responsable votre logement.</p>
+    </div>
+   </header>
+
+   <!-- Section Fonctionnalités -->
+<section class="features-section container py-5">
+  <div class="section-header text-center p-4 mb-4 shadow rounded">
+      <h2>⚙️ Nos Fonctionnalités</h2>
+      <p>Découvrez les principales fonctionnalités pour une gestion optimale de votre logement.</p>
+  </div>
+
+  <div class="row text-center">
+      <div class="col-md-4 mb-4">
+          <div class="feature-box shadow rounded p-4">
+              <i class="fas fa-chart-line fa-2x mb-3 text-primary"></i>
+              <h5>Suivi de la consommation</h5>
+              <p>Surveillez l'électricité, l'eau, et bien plus, grâce à des graphiques interactifs.</p>
+          </div>
+      </div>
+      <div class="col-md-4 mb-4">
+          <div class="feature-box shadow rounded p-4">
+              <i class="fas fa-lightbulb fa-2x mb-3 text-success"></i>
+              <h5>Gestion des capteurs</h5>
+              <p>Activez et configurez vos capteurs et actionneurs facilement.</p>
+          </div>
+      </div>
+      <div class="col-md-4 mb-4">
+          <div class="feature-box shadow rounded p-4">
+              <i class="fas fa-leaf fa-2x mb-3 text-warning"></i>
+              <h5>Économies réalisées</h5>
+              <p>Découvrez les gains obtenus grâce à des solutions durables.</p>
+          </div>
+      </div>
+  </div>
+</section>
+
+<section class="stats-section container py-5">
+  <div class="section-header text-center p-4 mb-4 shadow rounded">
+      <h2>📊 Nos Statistiques</h2>
+      <p>Un aperçu chiffré pour mieux comprendre l'impact de nos solutions.</p>
+  </div>
+    <div class="row text-center">
+      <div class="col-md-3 mb-4">
+        <div class="stats-box bg-primary text-white py-4">
+          <h3 id="num-logements">0</h3>
+          <p>Logements</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="stats-box bg-success text-white py-4">
+          <h3 id="num-types-capteurs">0</h3>
+          <p>Types de Capteurs/Actionneurs</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="stats-box bg-warning text-white py-4">
+          <h3 id="num-capteurs">0</h3>
+          <p>Capteurs/Actionneurs</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-4">
+        <div class="stats-box bg-danger text-white py-4">
+          <h3 id="num-mesures">0</h3>
+          <p>Mesures</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Section Contact -->
+<section class="contact-section container py-5" id="contact">
+  <div class="contact-header text-center p-4 mb-4 shadow rounded">
+      <h2>📞 Contactez-nous</h2>
+      <p>Nous sommes là pour répondre à toutes vos questions.</p>
+  </div>
+
+  <div class="row">
+      <!-- Informations de contact -->
+      <div class="col-md-5 contact-info p-4 shadow rounded d-flex flex-column justify-content-center">
+          <h4 class="mb-3 text-center">Informations de Contact</h4>
+          <ul class="list-unstyled text-center">
+              <li><i class="fa fa-envelope me-2"></i><a href="mailto:ayoub.ladjici@etu.sorbonne-universite.fr">ayoub.ladjici@etu.sorbonne-universite.fr</a></li>
+              <li><i class="fa fa-phone me-2"></i><a href="tel:+33778813232">+33 7 78 81 32 32</a></li>
+              <li><i class="fab fa-linkedin me-2"></i><a href="https://www.linkedin.com/in/ayoub-ladjici-560528238/" target="_blank">LinkedIn</a></li>
+          </ul>
+      </div>
+
+      <!-- Formulaire de contact -->
+      <div class="col-md-7 mt-4 mt-md-0">
+          <form class="contact-form p-4 shadow rounded">
+              <div class="mb-3">
+                  <label for="firstname" class="form-label">Prénom</label>
+                  <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Votre prénom" required>
+              </div>
+              <div class="mb-3">
+                  <label for="lastname" class="form-label">Nom de famille</label>
+                  <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Votre nom de famille" required>
+              </div>
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="Votre email" required>
+              </div>
+              <div class="mb-3">
+                  <label for="subject" class="form-label">Message</label>
+                  <textarea id="subject" name="subject" class="form-control" placeholder="Votre message..." rows="4" required></textarea>
+              </div>
+              <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="privacyCheck" required>
+                  <label class="form-check-label" for="privacyCheck">J'accepte la <a href="/confidentialite.html" target="_blank" class="text-primary">politique de confidentialité</a>.</label>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Envoyer</button>
+          </form>
+      </div>
+  </div>
+</section>
+
+
+<!-- 🦶 Pied de Page -->
+<footer class="footer text-center py-3">
+  <p>&copy; 2024 Econnect Home. Tous droits réservés.</p>
+</footer>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Icônes -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Récupération des statistiques depuis le serveur
+    fetch('/api/statistics')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('num-logements').innerText = data.num_logements;
+        document.getElementById('num-types-capteurs').innerText = data.num_types_capteurs;
+        document.getElementById('num-capteurs').innerText = data.num_capteurs;
+        document.getElementById('num-mesures').innerText = data.num_mesures;
+      })
+      .catch(error => console.error('Erreur lors de la récupération des statistiques :', error));
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+#Liste des commandes curl 
+
+#Commande permettant d'ajouter une ligne de données dans la table Logement
+curl -X 'POST' \
+  'http://127.0.0.1:8000/logement/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "adresse_postale": "str",
+  "numero_telephone": "str",
+  "adresse_ip": "str",
+  "date_insertion": "CURRENT_TIMESTAMP"
+}'
+
+#Commande permettant d'afficher les infos des 100 premiers enregistrement de logement dans la table Logement
+curl -X 'GET' \
+  'http://127.0.0.1:8000/logements/?offset=0&limit=100' \
+  -H 'accept: application/json'
+
+#Commande permettant d'afficher les infos d'un logement en fonction de l'id en entrée
+curl -X 'GET' \
+  'http://127.0.0.1:8000/logements/{id}' \
+  -H 'accept: application/json'
+
+#Commande permettant de supprimer une ligne spécifique à l'id dans la table Logement
+curl -X 'DELETE' \
+  'http://127.0.0.1:8000/logements/{id}' \
+  -H 'accept: application/json'
+
+
+#Commande permettant d'ajouter une ligne de donnée dans la table Piece
+curl -X 'POST' \
+  'http://127.0.0.1:8000/piece/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "nom": "str",
+  "coord_x": int,
+  "coord_y": int,
+  "coord_z": int,
+  "id_logement": int
+}'
+
+#Commande permettant d'ajouter une ligne de donnée dans la table Capteur/Actionneur
+curl -X 'POST' \
+  'http://127.0.0.1:8000/capteur_actionneur/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id_type": int,
+  "nom": "string",
+  "reference_commerciale": "str",
+  "reference_piece": int,
+  "port_communication": "str",
+  "date_insertion": "CURRENT_TIMESTAMP"
+}'
+
+#Commande permettant d'ajouter une ligne de donnée dans la table Type_Capteur/Actionneur
+curl -X 'POST' \
+  'http://127.0.0.1:8000/type_capteur_actionneur/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "nom_type": "str",
+  "unite": "str",
+  "min_valeur": int,
+  "max_valeur": int
+}'
+
+#Commande permettant d'ajouter une ligne de donnée dans la table Mesure
+curl -X 'POST' \
+  'http://127.0.0.1:8000/mesures/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id_capteur_actionneur": int,
+  "valeur": int,
+  "date_insertion": "CURRENT_TIMESTAMP"
+}'
+
+
+#Commande permettant d'ajouter une ligne de donnée dans la table Facture
+curl -X 'POST' \
+  'http://127.0.0.1:8000/factures/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id_logement": int,
+  "type_facture": "str",
+  "date_facture": "CURRENT_TIMESTAMP",
+  "montant": int,
+  "valeur_consommation": int
+}'
+
+#Commande permettant d'ajouter une ligne de donnée dans la table Mesure
+curl -X 'POST' \
+  'http://127.0.0.1:8000/mesures/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id_mesure": int,
+  "id_capteur_actionneur": int,
+  "valeur": int,
+  "date_insertion": "CURRENT_TIMESTAMP"
+}
+}
