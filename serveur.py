@@ -1,15 +1,13 @@
 from typing import Annotated,Optional, List
-from fastapi import Depends, FastAPI, HTTPException, Query, Request, Form
+from fastapi import Depends, FastAPI, HTTPException, Query, Request, Path, Body
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, JSONResponse
 import requests
 import pandas as pd
-from retry_requests import retry
 from fastapi.staticfiles import StaticFiles
 from datetime import datetime, timedelta 
 from sqlalchemy.sql import func
-
 
 # Configuration des templates
 templates = Jinja2Templates(directory="templates")
@@ -20,7 +18,7 @@ class Logement(SQLModel, table=True):
     adresse_postale : str = Field(index=True)
     numero_telephone : str = Field(index=True)
     adresse_ip : str = Field(index=True)
-    date_insertion: Optional[str] = Field(default="CURRENT_TIMESTAMP", nullable=False)
+    date_insertion: Optional[datetime] = Field(default_factory=datetime.utcnow)
 
 class Piece(SQLModel, table=True):
     id_piece : int = Field(default = None, primary_key = True)
@@ -37,7 +35,7 @@ class Capteur_Actionneur(SQLModel, table=True):
     reference_commerciale : str = Field(index=True)
     reference_piece : int = Field(index=True)
     port_communication : str = Field(index=True)
-    date_insertion: Optional[str] = Field(default="CURRENT_TIMESTAMP", nullable=False)
+    date_insertion: Optional[datetime] = Field(default_factory=datetime.utcnow)
     etat: str = Field(default="ON")  # Nouveau champ ON/OFF (Ajoute lors de la partie 3)
 
 class Type_Capteur_Actionneur(SQLModel, table=True):
@@ -51,13 +49,13 @@ class Mesure(SQLModel, table=True):
     id_mesure: int = Field(default=None, primary_key=True)
     id_capteur_actionneur: int
     valeur: float
-    date_insertion: Optional[str] = Field(default="CURRENT_TIMESTAMP", nullable=False)
+    date_insertion: Optional[datetime] = Field(default_factory=datetime.utcnow)
 
 class Facture(SQLModel, table=True):
     id_facture: int = Field(default=None, primary_key=True)
     id_logement: int = Field(index=True)
     type_facture: str = Field(index=True)
-    date_facture: Optional[str] = Field(default="CURRENT_TIMESTAMP", nullable=False)
+    date_facture: Optional[datetime] = Field(default_factory=datetime.utcnow)
     montant: float = Field(index=True)
     valeur_consommation: float = Field(index=True)
 
@@ -383,7 +381,7 @@ def get_statistics(session: SessionDep):
 @app.get("/api/logements")
 def get_logements(session: SessionDep):
     logements = session.exec(select(Logement)).all()
-    return [{"id_logement": logement.id_logement, "adresse": logement.adresse_postale} for logement in logements]
+    return [{"id_logement": logement.id_logement, "adresse": logement.adresse_postale, "IP": logement.adresse_ip, "Tel": logement.numero_telephone} for logement in logements]
 
 @app.get("/api/consommation")
 def get_consumption_data(session: SessionDep, logement_id: Optional[int] = None):
@@ -486,6 +484,148 @@ def get_economies(logement_id: int, session: SessionDep):
         })
 
     return data
+
+
+
+# ➕ Ajouter un logement
+@app.post("/api/logements")
+def add_logement(logement: Logement, session: SessionDep):
+    session.add(logement)
+    session.commit()
+    session.refresh(logement)
+    return {"success": True, "id": logement.id_logement}
+
+
+# ✏️ Modifier un logement
+# ✅ Route PUT pour modifier un logement
+@app.put("/api/logements/{id_logement}")
+def modifier_logement(
+    id_logement: int = Path(..., description="ID du logement à modifier"),
+    adresse_postale: str = Body(..., description="Nouvelle adresse postale"),
+    numero_telephone: str = Body(..., description="Nouveau numéro de téléphone"),
+    adresse_ip: str = Body(..., description="Nouvelle adresse IP"),
+    session: Session = Depends(get_session)
+):
+    """
+    Modifier les informations d'un logement existant.
+    """
+    # ✅ Récupération du logement existant
+    db_logement = session.get(Logement, id_logement)
+    if not db_logement:
+        raise HTTPException(status_code=404, detail="Logement non trouvé")
+
+    # ✅ Mise à jour des champs
+    db_logement.adresse_postale = adresse_postale
+    db_logement.numero_telephone = numero_telephone
+    db_logement.adresse_ip = adresse_ip
+    db_logement.date_insertion = datetime.utcnow()
+
+    session.commit()
+    session.refresh(db_logement)
+
+    return {
+        "message": "Logement modifié avec succès",
+        "logement": {
+            "id_logement": db_logement.id_logement,
+            "adresse_postale": db_logement.adresse_postale,
+            "numero_telephone": db_logement.numero_telephone,
+            "adresse_ip": db_logement.adresse_ip,
+            "date_insertion": db_logement.date_insertion
+        }
+    }
+
+# 🗑️ Supprimer un logement
+@app.delete("/api/logements/{logement_id}")
+def delete_logement(logement_id: int, session: SessionDep):
+    logement = session.get(Logement, logement_id)
+    if not logement:
+        raise HTTPException(status_code=404, detail="Logement non trouvé")
+    session.delete(logement)
+    session.commit()
+    return {"success": True}
+
+# Route pour ajouter une pièce
+@app.post("/api/pieces/")
+def ajouter_piece(piece: Piece, session: SessionDep):
+    session.add(piece)
+    session.commit()
+    session.refresh(piece)
+    return {"message": "Pièce ajoutée avec succès", "id_piece": piece.id_piece}
+
+
+@app.get("/api/pieces")
+def get_pieces(session: SessionDep, logement_id: Optional[int] = None):
+    query = select(Piece)
+    if logement_id:
+        query = query.where(Piece.id_logement == logement_id)
+    pieces = session.exec(query).all()
+    return pieces
+
+# Route pour ajouter un capteur/actionneur
+@app.post("/api/capteur_actionneur/")
+def ajouter_capteur_actionneur(capteur: Capteur_Actionneur, session: SessionDep):
+    if not capteur.reference_commerciale:
+        raise HTTPException(status_code=400, detail="La référence commerciale est requise.")
+
+    session.add(capteur)
+    session.commit()
+    session.refresh(capteur)
+    return capteur
+
+@app.get("/api/capteurs_actionneurs")
+def get_capteurs(session: SessionDep, piece_id: Optional[int] = None):
+    query = select(Capteur_Actionneur)
+    if piece_id:
+        query = query.where(Capteur_Actionneur.reference_piece == piece_id)
+    capteurs = session.exec(query).all()
+    return capteurs
+
+@app.get("/api/types_capteurs_actionneurs/")
+def read_types_capteurs_actionneurs(session: SessionDep):
+    types_capteurs_actionneurs = session.exec(select(Type_Capteur_Actionneur)).all()
+    return [{"id_type_capteur_actionneur": t.id_type_capteur_actionneur, "nom_type": t.nom_type} for t in types_capteurs_actionneurs]
+
+
+@app.put("/api/pieces/{id_piece}")
+def modifier_piece(id_piece: int, piece: Piece, session: SessionDep):
+    db_piece = session.get(Piece, id_piece)
+    if not db_piece:
+        raise HTTPException(status_code=404, detail="Pièce non trouvée")
+    
+    db_piece.nom = piece.nom or db_piece.nom
+    db_piece.coord_x = piece.coord_x or db_piece.coord_x
+    db_piece.coord_y = piece.coord_y or db_piece.coord_y
+    db_piece.coord_z = piece.coord_z or db_piece.coord_z
+    
+    session.commit()
+    session.refresh(db_piece)
+    return db_piece
+
+
+@app.delete("/api/pieces/{id_piece}")
+def supprimer_piece(id_piece: int, session: SessionDep):
+    db_piece = session.get(Piece, id_piece)
+    if not db_piece:
+        raise HTTPException(status_code=404, detail="Pièce non trouvée")
+    
+    session.delete(db_piece)
+    session.commit()
+    return {"message": "Pièce supprimée avec succès"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
