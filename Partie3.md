@@ -62,7 +62,7 @@ L'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJI
 - Une fois le logement sélectionné, les différentes pièces sont affichées avec chacune contenant les capteurs/actionneurs associés.
 - Chaque capteur/actionneur dispose d'un bouton ON/OFF permettant de basculer son état directement.
 
-L'intégralité du fichier **[`etat_capteur.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/etat_capteur.html)** et **[`etat_capteur.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/etat_capteur.css)** ont été écrits à l'aide de plusieurs prompts sur ChatGPT.
+L'intégralité du fichier **[`etat_capteurs.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/etat_capteurs.html)** et **[`etat_capteurs.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/etat_capteurs.css)** ont été écrits à l'aide de plusieurs prompts sur ChatGPT.
 
 1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer les pièces et leurs capteurs associés en fonction de l'ID d'un logement ? Chaque capteur doit afficher son ID, son nom, sa référence commerciale et son état." Cela concerne les ```lignes 410 à 435``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
 "Peux-tu écrire une fonction Python pour qu'ensuite sur le site je peux piloter l'état de mon capteur et mettre à jour cette information dans ma base de données ?" Cela concerne les ```lignes 437 à 454``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
