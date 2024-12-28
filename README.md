@@ -10,9 +10,8 @@ Ce projet IoT vise à développer une application permettant de gérer un logeme
   
 L'application est construite avec FastAPI pour le backend, HTML/CSS/JavaScript pour le frontend, et SQLite pour la base de données.
 
-📥 Installation des Dépendances
-Il faut avoir la version Python 3.10+ installé
-pip install fastapi uvicorn sqlmodel jinja2 python-multipart
+📥Il faut avoir la version Python 3.10+ installé et taper la commande suivante pour installer les dépendances nécessaires :
+```pip install fastapi uvicorn sqlmodel jinja2 python-multipart```
 
 
 
