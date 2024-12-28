@@ -3,7 +3,7 @@
 ## 🌐 HTML/CSS/Javascript
 Dans cette partie, j'ai développé mon site avec une page d'accueil et 4 autres onglets présentant la consommation (électricité, eau, gaz et Internet), l'état des différents capteurs/actionneurs, les économies réalisées par rapport au mois précédent, la configuration permettant d'ajouter un nouveau logement, de nouveaux capteurs/actionneurs.
 
-Dans le fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**, les lignes 340 à 363 définissent plusieurs routes dans notre application, chacune renvoyant une page HTML lorsqu'on essaie d'y accéder, cela est possible grâce à notre moteur de templates Jinja2. J'ai utilisé le prompt suivant sur ChatGPT : ```Peux-tu m'écrire des fonctions Python permettant de retourner des pages HTML pour chaque onglet de notre application ? en utilisant le moteur Jinja2 s'il te plaît```
+Dans le fichier **🐍[`main.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/main.py)**, les lignes 340 à 363 définissent plusieurs routes dans notre application, chacune renvoyant une page HTML lorsqu'on essaie d'y accéder, cela est possible grâce à notre moteur de templates Jinja2. J'ai utilisé le prompt suivant sur ChatGPT : ```Peux-tu m'écrire des fonctions Python permettant de retourner des pages HTML pour chaque onglet de notre application ? en utilisant le moteur Jinja2 s'il te plaît```
 
 👉 La page d'accueil est accessible sur : http://127.0.0.1:8000/
 
@@ -27,7 +27,7 @@ L'intégralité du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Lo
 - "Peux-tu ajouter une section d'accueil avec un texte de bienvenue centré dans un bloc vert s'il te plaît ?"  Cela concerne les ```lignes 38 à 43``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)**.
 
 4️⃣ Section fonctionnalités :
-- "Maintenant, peux-tu ajouter des blocs pour présenter les fonctionnalités principales de notre application ?" Cela concerne les ```lignes 46 à 75``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)** + "Peux-tu écrire une fonction Python qui récupère les statistiques tels que le nombre de logement, de types de capteurs/actionneurs, de capteurs/actionneurs installés et de mesures enregistrées dans ma base de donnée pour pouvoir les afficher sur ma page HTML ?" Cela concerne les ```lignes 365 à 378``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
+- "Maintenant, peux-tu ajouter des blocs pour présenter les fonctionnalités principales de notre application ?" Cela concerne les ```lignes 46 à 75``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)** + "Peux-tu écrire une fonction Python qui récupère les statistiques tels que le nombre de logement, de types de capteurs/actionneurs, de capteurs/actionneurs installés et de mesures enregistrées dans ma base de donnée pour pouvoir les afficher sur ma page HTML ?" Cela concerne les ```lignes 365 à 378``` du fichier **🐍[`main.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/main.py)**.
 
 5️⃣ Section statistiques :
 - "Peux-tu créer une section pour afficher des statistiques comme le nombre de logements, de types de capteurs/actionneurs, de capteurs/actionneurs installés et de mesures enregistrées avec des couleurs distinctes ?"  Cela concerne les ```lignes 77 à 108``` du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/accueil.html)**.
@@ -47,8 +47,8 @@ L'intégralité du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Lo
 
 L'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/consommation.html)** et **[`consommation.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/consommation.css)** ont été écrits à l'aide de plusieurs prompts sur ChatGPT.
 
-1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer la liste des logements de ma base, avec leur ID et adresse comme ça je pourrai les afficher sur mon site après ?" Cela concerne les ```lignes 380 à 383``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
-"Peux-tu écrire une fonction Python pour récupérer les données de consommation des 7 derniers jours, avec une option pour filtrer les données en fonction de l'id du logement ?" Cela concerne les ```lignes 385 à 407``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
+1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer la liste des logements de ma base, avec leur ID et adresse comme ça je pourrai les afficher sur mon site après ?" Cela concerne les ```lignes 380 à 383``` du fichier **🐍[`main.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/main.py)**.
+"Peux-tu écrire une fonction Python pour récupérer les données de consommation des 7 derniers jours, avec une option pour filtrer les données en fonction de l'id du logement ?" Cela concerne les ```lignes 385 à 407``` du fichier **🐍[`main.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/main.py)**.
 
 2️⃣ HTML: "Peux-tu créer une page HTML en essayant de garder le même style que pour la page d'accueil mais ici je veux que tu ajoutes un sélecteur de logement, des graphiques interactifs (courbes et camembert) sur les valeurs de consommation depuis ma base de données pour chaque type (Electricite, Eau, Gaz, Internet) et également un bouton qui renvoie le précédent site que j'avais crée ```http://127.0.0.1:8000/factures/chart``` dans un nouvel onglet ?" Cela concerne l'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/consommation.html)**.
 
@@ -64,8 +64,8 @@ L'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJI
 
 L'intégralité du fichier **[`etat_capteurs.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/etat_capteurs.html)** et **[`etat_capteurs.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/etat_capteurs.css)** ont été écrits à l'aide de plusieurs prompts sur ChatGPT.
 
-1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer les pièces et leurs capteurs associés en fonction de l'ID d'un logement ? Chaque capteur doit afficher son ID, son nom, sa référence commerciale et son état." Cela concerne les ```lignes 410 à 435``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
-"Peux-tu écrire une fonction Python pour qu'ensuite sur le site je peux piloter l'état de mon capteur et mettre à jour cette information dans ma base de données ?" Cela concerne les ```lignes 437 à 454``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
+1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer les pièces et leurs capteurs associés en fonction de l'ID d'un logement ? Chaque capteur doit afficher son ID, son nom, sa référence commerciale et son état." Cela concerne les ```lignes 410 à 435``` du fichier **🐍[`main.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/main.py)**.
+"Peux-tu écrire une fonction Python pour qu'ensuite sur le site je peux piloter l'état de mon capteur et mettre à jour cette information dans ma base de données ?" Cela concerne les ```lignes 437 à 454``` du fichier **🐍[`main.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/main.py)**.
 
 2️⃣ HTML: "Peux-tu créer une page HTML gardant le même style que les précédents onglets et permettant de sélectionner un logement depuis une liste déroulante et d'afficher les pièces associées avec leurs capteurs ? Chaque capteur doit afficher son état ON/OFF avec un bouton Activer/Désactiver pour le basculer. Et rajoute une fonctionnalité qui permet de conserver l'état de ma page lorsque je le rafrachis ça veut dire que si le capteur de mon salon est activer alors le bouton pour désactiver ne se réinitialise pas quand je clique sur F5" Cela concerne l'intégralité du fichier **[`etat_capteurs.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/etat_capteurs.html)**.
 
@@ -74,22 +74,32 @@ L'intégralité du fichier **[`etat_capteurs.html`](https://github.com/AyoubLADJ
 👉 L'onglet Économies est accessible sur : http://127.0.0.1:8000/economies
 
 📝 Structure de la page Économies :
-- Une barre de navigation fixe en haut de la page avec le logo centré, des onglets à gauche (Accueil, Consommation) et à droite (État des capteurs, Économies, Configuration).
+
 - Un menu déroulant permettant de choisir un logement spécifique afin d'afficher les données correspondantes.
 - Un graphique à barres affichant l'évolution du montant payé par mois pour chaque type de consommation
 - 4 tableaux séparés affichent les détails des économies pour chaque type de consommation : électricité, eau, gaz et Internet
 
 L'intégralité du fichier **[`economies.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/economies.html)** et **[`economies.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/economies.css)** ont été écrits à l'aide de plusieurs prompts sur ChatGPT.
 
-1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer les montants payé chaque mois et par type de facture afin de pouvoir établir le pourcentage d'économie par rapport au mois précédent." Cela concerne les ```lignes 458 à 488``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
+1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer les montants payé chaque mois et par type de facture afin de pouvoir établir le pourcentage d'économie par rapport au mois précédent." Cela concerne les ```lignes 458 à 488``` du fichier **🐍[`main.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/main.py)**.
 
 2️⃣ HTML: "Peux-tu ajouter un sélecteur permettant de choisir un logement et afficher les montants payés chaque mois par type de facture dans un graphique à barre ? Puis l'afficher avec 4 tableaux distincts et indiquer le pourcentage d'économie par rapport au mois précédent" Cela concerne l'intégralité du fichier **[`economies.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/economies.html)**. 
 
 3️⃣ CSS : "Peux-tu rajouter un fichier css pour le rendre beau à voir et bien évidemment responsive comme les précédents onglets ?" Cela concerne l'intégralité du fichier **[`economies.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/economies.css)**.
 
+👉 L'onglet Configuration est accessible sur : http://127.0.0.1:8000/configuration
 
+📝 Structure de la page Configuration :
+- Une barre de navigation fixe en haut de la page avec le logo centré, des onglets à gauche (Accueil, Consommation) et à droite (État des capteurs, Économies, Configuration).
+- Première section permettant une gestion des logements existants avec la possibilité de les modifier, de les supprimer ou même d'en ajouter un nouveau en remplissant un formulaire.
+- Deuxième section similaire à la première mais qui concerne les pièces d'un logement.
+- Dernière section permettant d'ajouter un capteur dans une pièce d'un logement.
 
+1️⃣ Python: "Peux-tu écrire des fonctions Python permettant d'ajouter, modifier et supprimer les logements, pièces, capteurs/actionneurs en respectant bien les classes que j'ai défini au tout début ?" Cela concerne les ```lignes 489 à 602``` du fichier **🐍[`main.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/main.py)**.
 
+2️⃣ HTML: "Peux-tu créer une section HTML pour afficher une liste de logements avec des boutons pour ajouter, modifier en remplissant un formulaire dans une boîte de dialogue et supprimer chaque logement ? Fais aussi la même pour les pièces de chaque logement et rajoute une dernière section pour ajouter des capteurs/actionneurs"  Cela concerne l'intégralité du fichier **[`configuration.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/configuration.html)**. 
+
+3️⃣ CSS : "Peux-tu rajouter un fichier css pour le rendre beau à voir et bien évidemment responsive comme les précédents onglets ?" Cela concerne l'intégralité du fichier **[`configuration.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/configuration.css)**.
 
 
 
