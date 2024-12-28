@@ -1,8 +1,19 @@
-# TP IoT - Logement Éco-Responsable
+# 📦 Projet IoT - Logement Éco-Responsable
 
-## 🗃️ Partie 1 : Modèle Relationnel de la Base de Données
-### 1.1 Spécifications de la base de données
-Question 1) Le modèle relationnel de la base de donnée se trouve dans le fichier uml_database.png et a été construit en respectant les spécifications données dans le sujet.
-Les rectangles verts contiennent le nom de l'entité et leurs attributs associés donc cela représentent les tables de la base de données. 
-Les losanges rouges montrent les relations entre les entités. Par exemple, un **Logement** peut **contenir plusieurs Pièces** *(1:N)*
+## 📝 Description du Projet
+Ce projet IoT vise à développer une application permettant de gérer un logement éco-responsable. Il inclut :
+
+- 🔌 Surveillance de la consommation énergétique
+- 📡 Gestion des capteurs et actionneurs
+- 💰 Affichage des économies réalisées
+- ⚙️ Configuration pour gérer les logements, pièces et équipements
+  
+L'application est construite avec FastAPI pour le backend, HTML/CSS/JavaScript pour le frontend, et SQLite pour la base de données.
+
+📥 Installation des Dépendances
+Il faut avoir la version Python 3.10+ installé
+pip install fastapi uvicorn sqlmodel jinja2 python-multipart
+
+
+
 
