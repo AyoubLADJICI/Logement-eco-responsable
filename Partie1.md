@@ -56,7 +56,7 @@ La fonction de remplissage se trouve dans le fichier : **📁 [`remplissage.py`]
 
 - La fonction ajouter_factures permet d'ajouter des factures "réalistes" pour un logement donné sur une période définie (exemple 30 jours). Exemple : ```ajouter_factures(1, 30)```
 - Les valeurs de consommation et les montants sont calculés en fonction des plages prédéfinies pour chaque type de consommation. La fonction fait également en sorte d'éviter les doublons en vérifiant les factures déjà présentes dans la base de données pour la même date et le même type.
-
+- Pour ma simulation, j'ai créé 3 logements préalablement possèdant une consommation propre à leur logement, par exemple, le premier logement consomme beaucoup d'eau donc il aura une plage de consommation d'eau très grande, de même pour le deuxième logement où la consommation d'Internet et d'électricité est énorme tandis que le troisième logement est plus écologique.
 - Ensuite j'ai entré un autre prompt ```Peux-tu me faire la même chose mais pour ajouter des valeurs de mesures pour chaque capteur/actionneur 1 fois chaque jour pendant une durée que je pourrai choisir ?``` sur ChatGPT.
 
 - La fonction ajouter_mesures permet d'ajouter des mesures pour chaque capteur/actionneur sur une période définie. Exemple : ```ajouter_mesures(30)```
