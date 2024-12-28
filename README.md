@@ -13,8 +13,9 @@ L'application est construite avec FastAPI pour le backend, HTML/CSS/JavaScript p
 📥Il faut avoir la version Python 3.10+ installé et taper la commande suivante pour installer les dépendances nécessaires :
 ```pip install fastapi uvicorn sqlmodel jinja2 python-multipart```
 
-🚀 Lancer le Serveur
-Pour démarrer l'application : ```fastapi dev main.py```
+🚀 Pour démarrer l'application, il faut taper la commande suivante : 
+
+```fastapi dev main.py```
 
 
 
