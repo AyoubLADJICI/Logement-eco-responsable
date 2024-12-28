@@ -4,34 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>État des Capteurs</title>
-  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="stylesheet" href="/static/css/etat_capteurs.css?v=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-    <h1 style="color:rgb(0, 128, 0)"><a class="navbar-brand fw-bold" href="/">Econnect Home</a></h1>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link" href="/consommation">Consommation</a></li>
-        <li class="nav-item"><a class="nav-link" href="/etat_capteurs">État des capteurs</a></li>
-        <li class="nav-item"><a class="nav-link" href="/economies">Économies</a></li>
-        <li class="nav-item"><a class="nav-link" href="/configuration">Configuration</a></li>
-      </ul>
+  <!-- 🚀 Barre de Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
+    <div class="container-fluid">
+      <!-- Onglets Gauche -->
+      <div class="nav-left navbar-nav">
+        <a class="nav-link" href="/">Accueil</a>
+        <a class="nav-link" href="/consommation">Consommation</a>
+      </div>
+
+      <!-- Logo Centré -->
+      <a class="navbar-brand logo-container mx-auto" href="/">
+        <img src="/static/images/logo.png" alt="Logo Econnect Home">
+      </a>
+
+      <!-- Onglets Droite -->
+      <div class="nav-right navbar-nav">
+        <a class="nav-link active" href="/etat_capteurs">État des capteurs</a>
+        <a class="nav-link" href="/economies">Économies</a>
+        <a class="nav-link" href="/configuration">Configuration</a>
+      </div>
+
+      <!-- Bouton Hamburger pour Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
   </nav>
 
+  <!-- ✅ Contenu Principal -->
   <div class="container mt-5">
-    <h1 class="text-center">État des Capteurs</h1>
+    <h1 class="text-center">📡 État des Capteurs</h1>
     <p class="text-center">Sélectionnez un logement pour afficher les capteurs par pièce.</p>
 
     <!-- Liste déroulante pour sélectionner un logement -->
     <div class="container mt-3">
-      <h3 class="text-center">Choisissez un logement :</h3>
+      <h3 class="text-center">🏠 Choisissez un logement :</h3>
       <select id="logement-selector" class="form-select mb-4">
         <option value="" disabled selected>-- Sélectionnez un logement --</option>
       </select>
@@ -41,6 +54,12 @@
     <div id="pieces-container" class="container mt-4"></div>
   </div>
 
+  <!-- 🦶 Pied de Page -->
+  <footer class="footer text-center py-3">
+    <p>&copy; 2024 Econnect Home. Tous droits réservés.</p>
+  </footer>
+
+  <!-- ✅ JavaScript -->
   <script>
     // Charger la liste des logements depuis l'API
     fetch('/api/logements')
@@ -58,7 +77,7 @@
 
     // Réagir au changement de sélection de logement
     document.getElementById('logement-selector').addEventListener("change", (event) => {
-      const selectedLogementId = event.target.value; // ID du logement sélectionné
+      const selectedLogementId = event.target.value;
       if (selectedLogementId) {
         fetch(`/api/pieces_capteurs?logement_id=${selectedLogementId}`)
           .then(response => response.json())
@@ -71,7 +90,7 @@
     function afficherPiecesEtCapteurs(data) {
       const piecesContainer = document.getElementById('pieces-container');
       piecesContainer.innerHTML = ''; // Réinitialiser le conteneur
-
+    
       data.forEach(piece => {
         const pieceDiv = document.createElement('div');
         pieceDiv.classList.add('card', 'mb-3');
@@ -91,8 +110,8 @@
         `;
         piecesContainer.appendChild(pieceDiv);
       });
-
-      // Ajouter les événements aux boutons d'activation/désactivation
+    
+      // Ajouter les événements aux boutons
       document.querySelectorAll('.toggle-capteur-btn').forEach(button => {
         button.addEventListener('click', () => {
           const capteurId = button.dataset.capteurId;
@@ -100,20 +119,23 @@
         });
       });
     }
+    
 
-    // Fonction pour activer/désactiver un capteur
-    function toggleCapteur(capteurId, button) {
-      fetch(`/api/capteur_toggle/${capteurId}`, { method: 'POST' })
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            button.classList.toggle('btn-danger');
-            button.classList.toggle('btn-success');
-            button.textContent = data.etat === 'ON' ? 'Désactiver' : 'Activer';
-          }
-        })
-        .catch(error => console.error('Erreur lors de la mise à jour du capteur :', error));
-    }
+// Fonction pour basculer l'état du capteur
+function toggleCapteur(capteurId, button) {
+  fetch(`/api/capteur_toggle/${capteurId}`, { method: 'POST' })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        button.classList.toggle('btn-danger');
+        button.classList.toggle('btn-success');
+        button.textContent = data.etat === 'ON' ? 'Désactiver' : 'Activer';
+        button.className = `btn btn-${data.etat === 'ON' ? 'danger' : 'success'} toggle-capteur-btn`;
+      }
+    })
+    .catch(error => console.error('Erreur lors de la mise à jour du capteur :', error));
+}
+
   </script>
 </body>
 </html>

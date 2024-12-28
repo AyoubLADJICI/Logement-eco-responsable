@@ -9,25 +9,31 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+  <!-- 🚀 Barre de Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
     <div class="container-fluid">
-      <!-- 🚀 Onglets Gauche -->
+      <!-- Onglets Gauche -->
       <div class="nav-left navbar-nav">
-        <a class="nav-link active" href="/">Accueil</a>
+        <a class="nav-link" href="/">Accueil</a>
         <a class="nav-link" href="/consommation">Consommation</a>
       </div>
-  
-      <!-- 🌟 Logo Centré -->
-      <a class="navbar-brand logo-container" href="/">
+
+      <!-- Logo Centré -->
+      <a class="navbar-brand logo-container mx-auto" href="/">
         <img src="/static/images/logo.png" alt="Logo Econnect Home">
       </a>
-  
-      <!-- 🚀 Onglets Droite -->
+
+      <!-- Onglets Droite -->
       <div class="nav-right navbar-nav">
-        <a class="nav-link" href="/etat_capteurs">État des capteurs</a>
+        <a class="nav-link active" href="/etat_capteurs">État des capteurs</a>
         <a class="nav-link" href="/economies">Économies</a>
         <a class="nav-link" href="/configuration">Configuration</a>
       </div>
+
+      <!-- Bouton Hamburger pour Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
   </nav>
 

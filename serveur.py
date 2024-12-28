@@ -36,6 +36,7 @@ class Capteur_Actionneur(SQLModel, table=True):
     reference_piece : int = Field(index=True)
     port_communication : str = Field(index=True)
     date_insertion: Optional[str] = Field(default="CURRENT_TIMESTAMP", nullable=False)
+    etat: str = Field(default="ON")  # Nouveau champ ON/OFF (Ajoute lors de la partie 3)
 
 class Type_Capteur_Actionneur(SQLModel, table=True):
     id_type_capteur_actionneur : int = Field(default = None, primary_key = True)
@@ -425,7 +426,8 @@ def get_pieces_capteurs(logement_id: int, session: SessionDep):
                     "id_capteur_actionneur": capteur.id_capteur_actionneur,
                     "nom": capteur.nom,
                     "reference_commerciale": capteur.reference_commerciale,
-                    "etat": capteur.port_communication  # Associe un état factice "ON/OFF" pour simplifier
+                    "port_communication" : capteur.port_communication,
+                    "etat": capteur.etat
                 }
                 for capteur in capteurs
             ]
@@ -438,17 +440,20 @@ def toggle_capteur(capteur_id: int, session: SessionDep):
     if not capteur:
         raise HTTPException(status_code=404, detail="Capteur non trouvé")
 
-    # Basculer l'état fictif "ON/OFF"
-    if capteur.port_communication == "ON":
-        capteur.port_communication = "OFF"
-    else:
-        capteur.port_communication = "ON"
+    # Validation de l'état actuel avant le basculement
+    if capteur.etat not in ["ON", "OFF"]:
+        raise HTTPException(status_code=400, detail="État invalide pour le basculement")
+    
+    # Basculer l'état ON/OFF
+    capteur.etat = "OFF" if capteur.etat == "ON" else "ON"
 
     session.add(capteur)
     session.commit()
     session.refresh(capteur)
 
-    return {"success": True, "etat": capteur.port_communication}
+    return {"success": True, "etat": capteur.etat}
+
+
 
 
 

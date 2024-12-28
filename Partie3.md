@@ -38,14 +38,14 @@ L'intégralité du fichier **[`accueil.html`](https://github.com/AyoubLADJICI/Lo
 7️⃣ CSS général :
 - "Pour finaliser notre page, ajoute du style CSS pour chaque section avec des effets de survol et peux-tu essayer de le rendre responsive ?" Cela concerne l'intégralité du fichier **[`accueil.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/accueil.css)**.
 
-👉 L'onglet consommation est accessible sur : http://127.0.0.1:8000/consommation
+👉 L'onglet Consommation est accessible sur : http://127.0.0.1:8000/consommation
 
 📝 Structure de la page Consommation :
-- Une barre de navigation fixe en haut de la page avec le logo centré, onglets à gauche (Accueil, Consommation) et à droite (État des capteurs, Économies, Configuration)
+- Une barre de navigation fixe en haut de la page avec le logo centré, des onglets à gauche (Accueil, Consommation) et à droite (État des capteurs, Économies, Configuration)
 - Nous avons un sélecteur permettant de choisir un logement pour afficher ses données spécifiques
 - 3 Boutons : Graphiques en Temps Réel (qui affiche des courbes de consommation de chaque type), Graphique en Camembert des montants par type de fatcure sur 7 jours, Graphique en Camembert des factures depuis le début (renvoie vers le le lien suivant : ```http://127.0.0.1:8000/factures/chart``` en ouvrant un nouvel onglet)
 
-L'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/consommation.html)** et **[`consommation.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/consommation.css)** ont été écrits à l'aide de 3 prompts sur ChatGPT.
+L'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/consommation.html)** et **[`consommation.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/consommation.css)** ont été écrits à l'aide de plusieurs prompts sur ChatGPT.
 
 1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer la liste des logements de ma base, avec leur ID et adresse comme ça je pourrai les afficher sur mon site après ?" Cela concerne les ```lignes 380 à 383``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
 "Peux-tu écrire une fonction Python pour récupérer les données de consommation des 7 derniers jours, avec une option pour filtrer les données en fonction de l'id du logement ?" Cela concerne les ```lignes 385 à 407``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
@@ -54,4 +54,16 @@ L'intégralité du fichier **[`consommation.html`](https://github.com/AyoubLADJI
 
 3️⃣ CSS : "Peux-tu ajouter du style CSS pour rendre cette page responsive en gardant le même style que la page d'Accueil ?" cela concerne l'intégralité du fichier **[`consommation.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/consommation.css)**.
 
+👉 L'onglet État des capteurs est accessible sur : http://127.0.0.1:8000/etat_capteurs
+
+📝 Structure de la page État des capteurs :
+- Une barre de navigation fixe en haut de la page avec le logo centré, des onglets à gauche (Accueil, Consommation) et à droite (État des capteurs, Économies, Configuration).
+- Une liste déroulante permettant de choisir un logement spécifique pour afficher ses capteurs et actionneurs associés.
+- Une fois le logement sélectionné, les différentes pièces sont affichées avec chacune contenant les capteurs/actionneurs associés.
+- Chaque capteur/actionneur dispose d'un bouton ON/OFF permettant de basculer son état directement.
+
+L'intégralité du fichier **[`etat_capteur.html`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/templates/etat_capteur.html)** et **[`etat_capteur.css`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/static/css/etat_capteur.css)** ont été écrits à l'aide de plusieurs prompts sur ChatGPT.
+
+1️⃣ Python: "Peux-tu écrire une fonction Python pour récupérer les pièces et leurs capteurs associés en fonction de l'ID d'un logement ? Chaque capteur doit afficher son ID, son nom, sa référence commerciale et son état." Cela concerne les ```lignes 410 à 435``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
+"Peux-tu écrire une fonction Python pour qu'ensuite sur le site je peux piloter l'état de mon capteur et mettre à jour cette information dans ma base de données ?" Cela concerne les ```lignes 437 à 454``` du fichier **🐍[`serveur.py`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/serveur.py)**.
 
