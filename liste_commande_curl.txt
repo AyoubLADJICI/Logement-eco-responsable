@@ -102,5 +102,4 @@ curl -X 'POST' \
   "id_capteur_actionneur": int,
   "valeur": int,
   "date_insertion": "CURRENT_TIMESTAMP"
-}
-}
+}'
