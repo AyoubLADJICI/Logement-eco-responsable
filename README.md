@@ -14,6 +14,10 @@ L'application est construite avec FastAPI pour le backend, HTML/CSS/JavaScript p
 ```bash 
 pip install fastapi uvicorn sqlmodel jinja2 python-multipart requests pandas
 ```
+Ensuite, il faut cloner le projet : 
+```bash 
+git clone https://github.com/AyoubLADJICI/Logement-eco-responsable.git
+```
 
 🚀 Pour démarrer l'application, il faut taper la commande suivante dans le terminal :  ```fastapi dev main.py```
 
