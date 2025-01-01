@@ -17,7 +17,7 @@ pip install fastapi uvicorn sqlmodel jinja2 python-multipart requests pandas
 
 🚀 Pour démarrer l'application, il faut taper la commande suivante dans le terminal :  ```fastapi dev main.py```
 
-Accédez ensuite à l'application via : ```http://127.0.0.1:8000```
+Accédez ensuite à l'application via : ```http://127.0.0.1:8000/```
 
 📚 Documentation Technique
 
