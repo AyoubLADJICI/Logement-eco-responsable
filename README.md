@@ -47,29 +47,26 @@ uvicorn main:app --reload
 
 Accédez ensuite à l'application via : **[`http://127.0.0.1:8000/`](http://127.0.0.1:8000/)**
 
-📚 Documentation Technique
+## 📚 Documentation Technique
 
-📝 Partie1.md
+📝 **[Partie1.md](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/Partie1.md)**
 - Présentation de l'architecture générale.
 - Mise en place de la base de données.
   
-📝 Partie2.md
+📝 **[Partie2.md](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/Partie2.md)**
 - Configuration et intégration des capteurs/actionneurs.
 - Gestion des interactions avec la base de données.
   
-📝 Partie3.md
+📝 **[Partie3.md](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/Partie3.md)**
 - Développement du Frontend (HTML/CSS/JavaScript).
 - Gestion des onglets : Accueil, Consommation, État des Capteurs, Économies, Configuration.
 - Explication détaillée des fonctionnalités.
  
-📝 liste_commande_curl.txt
+📝 **[liste_commande_curl.txt](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/liste_commande_curl.txt)**
 - Liste des commandes CURL pour tester les différentes routes API.
 
-📊 Base de Données
-- SQLite est utilisé comme système de gestion de base de données.
-
-📊 Schéma UML
-- Le fichier [`uml_database.png`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/uml_database.png) présente un diagramme relationnel de la base de données.
+## 📊 [`uml_database.png`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/uml_database.png)
+- Le fichier présente un diagramme relationnel de la base de données.
 
 
 
