@@ -7,16 +7,27 @@ Ce projet IoT vise à développer une application permettant de gérer un logeme
 - 📡 Gestion des capteurs et actionneurs
 - 💰 Affichage des économies réalisées
 - ⚙️ Configuration pour gérer les logements, pièces et équipements (capteurs/actionneurs)
-  
-L'application est construite avec FastAPI pour le backend, HTML/CSS/JavaScript pour le frontend, et SQLite pour la base de données.
 
-📥Il faut avoir la version Python 3.10+ installé et taper la commande suivante pour installer les dépendances nécessaires :
+## 🛠️ Technologies Utilisées
+- Backend : FastAPI
+- Frontend : HTML/CSS/JavaScript
+- Base de données : SQLite
+
+## 🚀 Installation et Lancement
+
+📥Prérequis 
+Il faut avoir la version Python 3.10+ installé sur son système
+
+📦 Installation des dépendances
+Exécutez la commande suivante pour installer les bibliothèques nécessaires :
 ```bash 
 pip install fastapi uvicorn sqlmodel jinja2 python-multipart requests pandas
 ```
-Ensuite, il faut cloner le projet : 
+📂 Clonage du projet
+Clonez le dépôt GitHub sur votre environnement local :
 ```bash 
 git clone https://github.com/AyoubLADJICI/Logement-eco-responsable.git
+cd Logement-eco-responsable
 ```
 
 🚀 Pour démarrer l'application, il faut taper la commande suivante dans le terminal :  ```fastapi dev main.py```
