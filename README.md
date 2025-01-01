@@ -15,15 +15,18 @@ Ce projet IoT vise à développer une application permettant de gérer un logeme
 
 ## 🚀 Installation et Lancement
 
-📥Prérequis 
+📥Prérequis
+
 Il faut avoir la version Python 3.10+ installé sur son système
 
 📦 Installation des dépendances
+
 Exécutez la commande suivante pour installer les bibliothèques nécessaires :
 ```bash 
 pip install fastapi uvicorn sqlmodel jinja2 python-multipart requests pandas
 ```
 📂 Clonage du projet
+
 Clonez le dépôt GitHub sur votre environnement local :
 ```bash 
 git clone https://github.com/AyoubLADJICI/Logement-eco-responsable.git
