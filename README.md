@@ -65,7 +65,7 @@ Accédez ensuite à l'application via : **[`http://127.0.0.1:8000/`](http://127.
 📝 **[liste_commande_curl.txt](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/liste_commande_curl.txt)**
 - Liste des commandes CURL pour tester les différentes routes API.
 
-## 📊 [`uml_database.png`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/uml_database.png)
+## 📊 **[`uml_database.png`](https://github.com/AyoubLADJICI/Logement-eco-responsable/blob/main/uml_database.png)**
 - Le fichier présente un diagramme relationnel de la base de données.
 
 
