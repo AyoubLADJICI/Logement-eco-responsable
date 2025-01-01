@@ -33,9 +33,19 @@ git clone https://github.com/AyoubLADJICI/Logement-eco-responsable.git
 cd Logement-eco-responsable
 ```
 
-🚀 Pour démarrer l'application, il faut taper la commande suivante dans le terminal :  ```fastapi dev main.py```
+🚀 Démarrer l'application 
 
-Accédez ensuite à l'application via : ```http://127.0.0.1:8000/```
+Lance le serveur FastAPI avec la commande : 
+```bash 
+fastapi dev main.py
+```
+ou
+
+```bash 
+uvicorn main:app --reload
+```
+
+Accédez ensuite à l'application via : **[`http://127.0.0.1:8000/`](http://127.0.0.1:8000/)**
 
 📚 Documentation Technique
 
